@@ -16,7 +16,7 @@ export function Home() {
         <span className="eyebrow">BBDC · Barishal, Bangladesh</span>
         <h1>{en ? 'When Barishal needs help, neighbours show up.' : 'বরিশালের প্রয়োজনে, প্রতিবেশীরা এগিয়ে আসে।'}</h1>
         <p className="lead">{en ? 'Beyond Boundaries for Development and Change is a volunteer organisation founded in Barishal in 2012. Give blood, give food, give a livelihood — or simply give your time.' : 'বিয়ন্ড বাউন্ডারিজ ফর ডেভেলপমেন্ট অ্যান্ড চেঞ্জ বরিশালে ২০১২ সালে প্রতিষ্ঠিত একটি স্বেচ্ছাসেবী সংগঠন। রক্ত দিন, খাদ্য দিন, জীবিকা দিন — অথবা আপনার সময় দিন।'}</p>
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 18 }}><Link className="btn btn-red" to="/donate">{u.donateNow}</Link><Link className="btn btn-outline btn-outline-light" to="/programmes">{u.explore}</Link></div>
+        <div className="hero-cta" style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 18 }}><Link className="btn btn-red" to="/donate">{u.donateNow}</Link><Link className="btn btn-outline btn-outline-light" to="/programmes">{u.explore}</Link></div>
         <p className="muted" style={{ marginTop: 14 }}>{u.trustLine}</p>
         <p className="hero-video-credit">{en ? 'Video: BBDC Day 2024 — Barishal Blood Donors Club’s 12-year celebration.' : 'ভিডিও: বিবিডিসি ডে ২০২৪ — বরিশাল ব্লাড ডোনার্স ক্লাবের ১২ বছর পূর্তি অনুষ্ঠান।'}</p>
       </div>
