@@ -60,16 +60,18 @@ export function Header() {
         {drop('more', u.more, [{ to: '/transparency', label: u.transparency }, { to: '/contact', label: u.contact }])}
       </nav>
       <div className="actions">
-        <button className="iconbtn" aria-label="Toggle theme" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}><Icon name={theme === 'light' ? 'moon' : 'sun'} /></button>
-        <button className="iconbtn" aria-label="Toggle language" onClick={() => setLang(lang === 'en' ? 'bn' : 'en')} style={{ fontSize: 12, fontWeight: 800 }}>{lang === 'en' ? 'বাং' : 'EN'}</button>
+        <button className="iconbtn desktop-only" aria-label="Toggle theme" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}><Icon name={theme === 'light' ? 'moon' : 'sun'} /></button>
+        <button className="iconbtn desktop-only" aria-label="Toggle language" onClick={() => setLang(lang === 'en' ? 'bn' : 'en')} style={{ fontSize: 12, fontWeight: 800 }}>{lang === 'en' ? 'বাং' : 'EN'}</button>
         <Link to="/volunteer" className="btn btn-outline btn-sm hide-sm" onClick={closeAll}>{u.join}</Link>
         <Link to="/donate" className="btn btn-red btn-sm" onClick={closeAll}>{u.donate}</Link>
         <button className="iconbtn burger" aria-label="Menu" onClick={() => setMobile(!mobile)}><Icon name={mobile ? 'close' : 'menu'} /></button>
       </div>
     </div>
     <div className={`mobile-menu ${mobile ? 'open' : ''}`}>
-      {[['/', u.home], ['/about', u.about], ['/programmes', u.programmes], ['/campaigns', u.campaigns], ['/stories', u.stories], ['/volunteer', u.volunteer], ['/blood', u.blood], ['/transparency', u.transparency], ['/contact', u.contact], ['/donate', u.donate]].map(([to, l]) => <Link key={to} to={to} onClick={closeAll}>{l}</Link>)}
-      <button onClick={() => { setLang(lang === 'en' ? 'bn' : 'en') }}>{lang === 'en' ? 'বাংলা' : 'English'}</button>
+      <div className="mobile-cta"><Link to="/donate" className="btn btn-red" onClick={closeAll}>{u.donate}</Link><Link to="/volunteer" className="btn btn-outline" onClick={closeAll}>{u.join}</Link></div>
+      <div className="mobile-tools"><button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>{theme === 'light' ? (lang === 'bn' ? 'ডার্ক মোড' : 'Dark mode') : (lang === 'bn' ? 'লাইট মোড' : 'Light mode')}</button><button onClick={() => { setLang(lang === 'en' ? 'bn' : 'en') }}>{lang === 'en' ? 'বাংলা' : 'English'}</button></div>
+      {[['/', u.home], ['/about', u.about], ['/programmes', u.programmes], ['/campaigns', u.campaigns], ['/stories', u.stories], ['/volunteer', u.volunteer], ['/blood', u.blood], ['/transparency', u.transparency], ['/contact', u.contact]].map(([to, l]) => <Link key={to} to={to} onClick={closeAll}>{l}</Link>)}
+      <div className="mobile-foot"><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div><p>{REGISTRATION}</p></div>
     </div>
     </header>
   </>)
