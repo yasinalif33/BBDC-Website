@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSite, pick } from './context.jsx'
-import { UI, FUNDS } from './data.js'
+import { UI, FUNDS, LOGO_URL, REGISTRATION, SOCIALS } from './data.js'
 
 export function Icon({ name, size = 20 }) {
   const p = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', width: size, height: size, viewBox: '0 0 24 24', 'aria-hidden': true }
@@ -25,6 +25,10 @@ export function Icon({ name, size = 20 }) {
     mail: <><rect x="2" y="4" width="20" height="16" rx="2" /><path d="M22 6l-10 7L2 6" /></>,
     phone: <><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z" /></>,
     pin: <><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></>,
+    facebook: <><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></>,
+    instagram: <><rect x="2" y="2" width="20" height="20" rx="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></>,
+    youtube: <><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" /></>,
+    x: <><path d="M4 4l16 16M20 4L4 20" /></>,
   }
   return <svg {...p}>{paths[name] || paths.heart}</svg>
 }
@@ -47,9 +51,9 @@ export function Header() {
     </div>
   )
   return (<>
-    <div className="topbar"><div className="wrap"><span>Barishal, Bangladesh · {lang === 'bn' ? '২০১২ সাল থেকে' : 'Since 2012'}</span><span><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a></span></div></div>
+    <div className="topbar"><div className="wrap"><span>Barishal, Bangladesh · {lang === 'bn' ? '২০১২ সাল থেকে' : 'Since 2012'}</span><span>{REGISTRATION} · <a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a></span></div></div>
     <header className="site"><div className="wrap header-row">
-      <Link to="/" className="logo" onClick={closeAll}><span style={{ color: 'var(--red)' }}>BBDC</span><small>Beyond Boundaries<br />for Development &amp; Change</small></Link>
+      <Link to="/" className="logo" onClick={closeAll} aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></Link>
       <nav className="main">
         {link('/', u.home)}{link('/about', u.about)}{link('/programmes', u.programmes)}{link('/campaigns', u.campaigns)}{link('/stories', u.stories)}
         {drop('involved', u.getInvolved, [{ to: '/volunteer', label: u.volunteer }, { to: '/blood', label: u.blood }])}
@@ -73,11 +77,11 @@ export function Header() {
 export function Footer() {
   const { lang } = useSite(); const u = t(null, lang)
   return <footer className="site"><div className="wrap footgrid">
-    <div><div className="logo"><span style={{ color: 'var(--red)' }}>BBDC</span></div><p className="muted">{lang === 'bn' ? 'বরিশালের একটি স্বেচ্ছাসেবী সংগঠন — ২০১২ সাল থেকে।' : 'A volunteer organisation in Barishal, Bangladesh — since 2012.'}</p><p className="muted" style={{ fontSize: 13 }}>{u.footerNote}</p></div>
+    <div><div className="logo"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img foot-logo" onError={e => { e.currentTarget.style.display = 'none' }} /></div><p className="muted">{lang === 'bn' ? 'বরিশালের একটি স্বেচ্ছাসেবী সংগঠন — ২০১২ সাল থেকে।' : 'A volunteer organisation in Barishal, Bangladesh — since 2012.'}</p><p className="muted" style={{ fontSize: 13 }}>{u.footerNote}</p><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div></div>
     <div><b>{u.programmes}</b><Link to="/programmes">All programmes</Link><Link to="/blood">{u.blood}</Link><Link to="/campaigns">{u.campaigns}</Link></div>
     <div><b>{u.getInvolved}</b><Link to="/volunteer">{u.volunteer}</Link><Link to="/donate">{u.donate}</Link><Link to="/transparency">{u.transparency}</Link></div>
     <div><b>{u.contact}</b><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a><Link to="/contact">Barishal, Bangladesh</Link></div>
-  </div><div className="wrap"><p className="muted" style={{ fontSize: 13 }}>© BBDC — Beyond Boundaries for Development and Change. {u.paymentNote}</p></div></footer>
+  </div><div className="wrap"><p className="muted" style={{ fontSize: 13 }}>© BBDC — Beyond Boundaries for Development and Change · {REGISTRATION}. {u.paymentNote}</p></div></footer>
 }
 export function Progress({ raised, goal }) {
   const pct = Math.min(100, Math.round(raised / goal * 100))

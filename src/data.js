@@ -1,3 +1,11 @@
+export const LOGO_URL = 'https://bbdc.org.bd/wp-content/uploads/2025/02/logo.png'
+export const REGISTRATION = 'Registration No: Bari – 1836/17'
+export const SOCIALS = [
+  { id: 'facebook', label: 'Facebook', url: 'https://www.facebook.com/BBDCaid' },
+  { id: 'instagram', label: 'Instagram', url: 'https://www.instagram.com/bbdcaid/' },
+  { id: 'youtube', label: 'YouTube', url: 'https://www.youtube.com/@barishalblooddonorsclubbbd4032' },
+  { id: 'x', label: 'X', url: 'https://x.com/BBDCaid' },
+]
 export const IMG = {
   hero: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1400&q=80',
   about: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1200&q=80',
