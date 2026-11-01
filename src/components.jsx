@@ -51,7 +51,7 @@ export function Header() {
     </div>
   )
   return (<>
-    <div className="topbar"><div className="wrap"><span>Barishal, Bangladesh · {lang === 'bn' ? '২০১২ সাল থেকে' : 'Since 2012'}</span><span>{REGISTRATION} · <a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a></span></div></div>
+    <div className="topbar"><div className="wrap"><span>Barishal, Bangladesh · {lang === 'bn' ? '২০১২ সাল থেকে' : 'Since 2012'}</span><span><span className="topbar-reg">{REGISTRATION}</span><span className="topbar-fb"> · <a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a></span></span></div></div>
     <header className="site"><div className="wrap header-row">
       <Link to="/" className="logo" onClick={closeAll} aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></Link>
       <nav className="main">
