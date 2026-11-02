@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSite, pick } from './context.jsx'
-import { UI, FUNDS, LOGO_URL, REGISTRATION, SOCIALS } from './data.js'
+import { UI, FUNDS, LOGO_URL, REGISTRATION, SOCIALS, PARTNERS } from './data.js'
 
 export function Icon({ name, size = 20 }) {
   const p = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', width: size, height: size, viewBox: '0 0 24 24', 'aria-hidden': true }
@@ -45,8 +45,8 @@ export function Header() {
   const closeAll = () => { setMobile(false); setOpen(null) }
   const link = (to, label) => <NavLink key={to} to={to} onClick={closeAll} className={({ isActive }) => isActive ? 'active' : ''}>{label}</NavLink>
   const drop = (key, label, items) => (
-    <div className={`dropdown ${open === key ? 'open' : ''}`} onMouseLeave={() => setOpen(null)}>
-      <button className="navlink" onClick={() => setOpen(open === key ? null : key)}>{label} <Icon name="chev" size={14} /></button>
+    <div className={`dropdown ${open === key ? 'open' : ''}`} onMouseEnter={() => setOpen(key)} onMouseLeave={() => setOpen(null)}>
+      <button className="navlink" aria-expanded={open === key} aria-haspopup="true" onClick={() => setOpen(open === key ? null : key)}>{label} <Icon name="chev" size={14} /></button>
       <div className="dropdown-panel">{items.map(i => <Link key={i.to} to={i.to} onClick={closeAll}>{i.label}</Link>)}</div>
     </div>
   )
@@ -56,7 +56,7 @@ export function Header() {
       <Link to="/" className="logo" onClick={closeAll} aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></Link>
       <nav className="main">
         {link('/', u.home)}{link('/about', u.about)}{link('/programmes', u.programmes)}{link('/campaigns', u.campaigns)}{link('/stories', u.stories)}
-        {drop('involved', u.getInvolved, [{ to: '/volunteer', label: u.volunteer }, { to: '/blood', label: u.blood }])}
+        {drop('involved', u.getInvolved, [{ to: '/volunteer', label: u.volunteer }, { to: '/blood', label: u.blood }, { to: '/celebrate', label: u.celebrate }])}
         {drop('more', u.more, [{ to: '/transparency', label: u.transparency }, { to: '/contact', label: u.contact }])}
       </nav>
       <div className="actions">
@@ -70,7 +70,7 @@ export function Header() {
     <div className={`mobile-menu ${mobile ? 'open' : ''}`}>
       <div className="mobile-cta"><Link to="/donate" className="btn btn-primary" onClick={closeAll}>{u.donate}</Link><Link to="/volunteer" className="btn btn-outline" onClick={closeAll}>{u.join}</Link></div>
       <div className="mobile-tools"><button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>{theme === 'light' ? (lang === 'bn' ? 'ডার্ক মোড' : 'Dark mode') : (lang === 'bn' ? 'লাইট মোড' : 'Light mode')}</button><button onClick={() => { setLang(lang === 'en' ? 'bn' : 'en') }}>{lang === 'en' ? 'বাংলা' : 'English'}</button></div>
-      {[['/', u.home], ['/about', u.about], ['/programmes', u.programmes], ['/campaigns', u.campaigns], ['/stories', u.stories], ['/volunteer', u.volunteer], ['/blood', u.blood], ['/transparency', u.transparency], ['/contact', u.contact]].map(([to, l]) => <Link key={to} to={to} onClick={closeAll}>{l}</Link>)}
+      {[['/', u.home], ['/about', u.about], ['/programmes', u.programmes], ['/campaigns', u.campaigns], ['/stories', u.stories], ['/celebrate', u.celebrate], ['/volunteer', u.volunteer], ['/blood', u.blood], ['/transparency', u.transparency], ['/contact', u.contact]].map(([to, l]) => <Link key={to} to={to} onClick={closeAll}>{l}</Link>)}
       <div className="mobile-foot"><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div><p>{REGISTRATION}</p></div>
     </div>
     </header>
@@ -81,7 +81,7 @@ export function Footer() {
   return <footer className="site"><div className="wrap footgrid">
     <div><div className="logo"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img foot-logo" onError={e => { e.currentTarget.style.display = 'none' }} /></div><p className="muted">{lang === 'bn' ? 'বরিশালের একটি স্বেচ্ছাসেবী সংগঠন — ২০১২ সাল থেকে।' : 'A volunteer organisation in Barishal, Bangladesh — since 2012.'}</p><p className="muted" style={{ fontSize: 13 }}>{u.footerNote}</p><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div></div>
     <div><b>{u.programmes}</b><Link to="/programmes">All programmes</Link><Link to="/blood">{u.blood}</Link><Link to="/campaigns">{u.campaigns}</Link></div>
-    <div><b>{u.getInvolved}</b><Link to="/volunteer">{u.volunteer}</Link><Link to="/donate">{u.donate}</Link><Link to="/transparency">{u.transparency}</Link></div>
+    <div><b>{u.getInvolved}</b><Link to="/volunteer">{u.volunteer}</Link><Link to="/celebrate">{u.celebrate}</Link><Link to="/donate">{u.donate}</Link><Link to="/transparency">{u.transparency}</Link></div>
     <div><b>{u.contact}</b><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a><Link to="/contact">Barishal, Bangladesh</Link></div>
   </div><div className="wrap"><p className="muted" style={{ fontSize: 13 }}>© BBDC — Beyond Boundaries for Development and Change · {REGISTRATION}. {u.paymentNote}</p></div></footer>
 }
@@ -118,6 +118,12 @@ export function DonateWidget({ initialFund }) {
     <input className="field" type="number" value={assets} onChange={e => setAssets(Number(e.target.value) || 0)} />
     <p>{lang === 'bn' ? 'আনুমানিক যাকাত (২.৫%):' : 'Estimated Zakat (2.5%):'} <b>৳{Math.round(assets * 0.025).toLocaleString()}</b></p>
   </div>
+}
+export function PartnersMarquee() {
+  const { lang } = useSite()
+  const en = lang !== 'bn'
+  const tiles = [...PARTNERS, ...PARTNERS]
+  return <div><div className="marquee" aria-label={en ? 'Partners BBDC has worked with' : 'বিবিডিসি যাদের সঙ্গে কাজ করেছে'}><div className="marquee-track">{tiles.map((name, i) => <div key={i} className="partner-tile" aria-hidden={i >= PARTNERS.length}>{name}</div>)}</div></div><p className="muted" style={{ fontSize: 13, marginTop: 12 }}>{en ? 'Partner names as shared by BBDC. Partner logos will replace these name tiles when BBDC supplies them.' : 'বিবিডিসির দেওয়া অংশীদারদের নাম। বিবিডিসি লোগো দিলে এই নামের টাইলগুলো লোগো দিয়ে প্রতিস্থাপন করা হবে।'}</p></div>
 }
 export function Newsletter() {
   const { lang } = useSite(); const u = t(null, lang); const [ok, setOk] = useState(false)
