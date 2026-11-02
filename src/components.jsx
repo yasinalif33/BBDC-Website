@@ -63,12 +63,12 @@ export function Header() {
         <button className="iconbtn desktop-only" aria-label="Toggle theme" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}><Icon name={theme === 'light' ? 'moon' : 'sun'} /></button>
         <button className="iconbtn desktop-only" aria-label="Toggle language" onClick={() => setLang(lang === 'en' ? 'bn' : 'en')} style={{ fontSize: 12, fontWeight: 800 }}>{lang === 'en' ? 'বাং' : 'EN'}</button>
         <Link to="/volunteer" className="btn btn-outline btn-sm hide-sm" onClick={closeAll}>{u.join}</Link>
-        <Link to="/donate" className="btn btn-red btn-sm" onClick={closeAll}>{u.donate}</Link>
+        <Link to="/donate" className="btn btn-primary btn-sm" onClick={closeAll}>{u.donate}</Link>
         <button className="iconbtn burger" aria-label="Menu" onClick={() => setMobile(!mobile)}><Icon name={mobile ? 'close' : 'menu'} /></button>
       </div>
     </div>
     <div className={`mobile-menu ${mobile ? 'open' : ''}`}>
-      <div className="mobile-cta"><Link to="/donate" className="btn btn-red" onClick={closeAll}>{u.donate}</Link><Link to="/volunteer" className="btn btn-outline" onClick={closeAll}>{u.join}</Link></div>
+      <div className="mobile-cta"><Link to="/donate" className="btn btn-primary" onClick={closeAll}>{u.donate}</Link><Link to="/volunteer" className="btn btn-outline" onClick={closeAll}>{u.join}</Link></div>
       <div className="mobile-tools"><button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>{theme === 'light' ? (lang === 'bn' ? 'ডার্ক মোড' : 'Dark mode') : (lang === 'bn' ? 'লাইট মোড' : 'Light mode')}</button><button onClick={() => { setLang(lang === 'en' ? 'bn' : 'en') }}>{lang === 'en' ? 'বাংলা' : 'English'}</button></div>
       {[['/', u.home], ['/about', u.about], ['/programmes', u.programmes], ['/campaigns', u.campaigns], ['/stories', u.stories], ['/volunteer', u.volunteer], ['/blood', u.blood], ['/transparency', u.transparency], ['/contact', u.contact]].map(([to, l]) => <Link key={to} to={to} onClick={closeAll}>{l}</Link>)}
       <div className="mobile-foot"><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div><p>{REGISTRATION}</p></div>
@@ -112,7 +112,7 @@ export function DonateWidget({ initialFund }) {
     <label>{lang === 'bn' ? 'পেমেন্ট মাধ্যম' : 'Payment method'}</label>
     <div className="chips">{['bKash', 'Nagad', 'Rocket', 'SSLCommerz', 'Bank'].map(p => <button key={p} className={`chip ${pay === p ? 'on' : ''}`} onClick={() => setPay(p)}>{p}</button>)}</div>
     <div className="notice" style={{ marginTop: 14 }}>{u.paymentNote} {lang === 'bn' ? 'এই পর্যায়ে কোনো টাকা কাটা হবে না।' : 'No money is taken at this stage.'}</div>
-    <button className="btn btn-red" style={{ marginTop: 14, width: '100%' }} onClick={() => setDone(true)}>{u.donate} {amt ? `৳${amt.toLocaleString()}` : ''} {pay ? `· ${pay}` : ''}</button>
+    <button className="btn btn-primary" style={{ marginTop: 14, width: '100%' }} onClick={() => setDone(true)}>{u.donate} {amt ? `৳${amt.toLocaleString()}` : ''} {pay ? `· ${pay}` : ''}</button>
     <h3 style={{ marginTop: 28 }}>{lang === 'bn' ? 'যাকাত ক্যালকুলেটর' : 'Zakat calculator'}</h3>
     <label>{lang === 'bn' ? 'মোট সম্পদ (৳)' : 'Total zakatable assets (৳)'}</label>
     <input className="field" type="number" value={assets} onChange={e => setAssets(Number(e.target.value) || 0)} />
@@ -121,5 +121,5 @@ export function DonateWidget({ initialFund }) {
 }
 export function Newsletter() {
   const { lang } = useSite(); const u = t(null, lang); const [ok, setOk] = useState(false)
-  return <div className="band"><h2>{u.newsletter}</h2><p className="lead">{lang === 'bn' ? 'আপনার সহায়তা যাদের কাছে পৌঁছায়, তাদের নিয়ে একটি ছোট ইমেইল। স্প্যাম নয়, যেকোনো সময় বাতিল করা যাবে।' : 'One short email about the people your support reaches. No spam, unsubscribe anytime.'}</p>{ok ? <p className="ok">{u.subscribed}</p> : <form onSubmit={e => { e.preventDefault(); setOk(true) }} style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><input required type="email" className="field" style={{ maxWidth: 360 }} placeholder="Email" /><button className="btn btn-red">{u.subscribe}</button></form>}</div>
+  return <div className="band"><h2>{u.newsletter}</h2><p className="lead">{lang === 'bn' ? 'আপনার সহায়তা যাদের কাছে পৌঁছায়, তাদের নিয়ে একটি ছোট ইমেইল। স্প্যাম নয়, যেকোনো সময় বাতিল করা যাবে।' : 'One short email about the people your support reaches. No spam, unsubscribe anytime.'}</p>{ok ? <p className="ok">{u.subscribed}</p> : <form onSubmit={e => { e.preventDefault(); setOk(true) }} style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}><input required type="email" className="field" style={{ maxWidth: 360 }} placeholder="Email" /><button className="btn btn-primary">{u.subscribe}</button></form>}</div>
 }
