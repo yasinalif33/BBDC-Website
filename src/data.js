@@ -7,13 +7,14 @@ export const SOCIALS = [
   { id: 'x', label: 'X', url: 'https://x.com/BBDCaid' },
 ]
 export const IMG = {
-  hero: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1400&q=80',
-  about: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1200&q=80',
+  hero: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1400&q=80',
+  about: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80',
+  mehendi: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1200&q=80',
   blood: 'https://images.unsplash.com/photo-1615461066841-6116e61058fa?auto=format&fit=crop&w=1200&q=80',
   health: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
-  education: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=1200&q=80',
+  education: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80',
   food: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200&q=80',
-  livelihood: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80',
+  livelihood: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80',
   climate: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1200&q=80',
   disaster: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=80',
   awareness: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
@@ -46,7 +47,7 @@ export const CAMPAIGNS = [
 ]
 export const STORIES = [
   { slug: 'eider-hashi-season-4', en: 'Eid-er Hashi Season 4', bn: 'ঈদের হাসি সিজন ৪', img: IMG.story, meta_en: 'Seasonal Giving · Eid · Season 4', meta_bn: 'মৌসুমি দান · ঈদ · সিজন ৪', ex_en: 'Eid gift distribution for families in Barishal, closing Season 4 of Eid-er Hashi.', ex_bn: 'বরিশালের পরিবারের জন্য ঈদ উপহার বিতরণ — ঈদের হাসির সিজন ৪-এর সমাপ্তি।', body_en: ['Eid-er Hashi Season 4 brought Eid gifts to families in Barishal. Volunteers organised the distribution, welcomed families, and made sure gifts reached the people they were meant for.', 'Season 5 is now the open campaign. If you want this year’s Eid giving to reach more families, choose the Eid-er Hashi fund on the Donate page.'] },
-  { slug: 'mehendi-utsob-season-8', en: 'Mehendi Utsob Season 8', bn: 'মেহেদী উৎসব সিজন ৮', img: IMG.about, meta_en: 'Community · Season 8', meta_bn: 'সম্প্রদায় · সিজন ৮', ex_en: 'A community mehendi festival bringing families together in Barishal.', ex_bn: 'বরিশালে পরিবারগুলোকে একত্র করা একটি কমিউনিটি মেহেদী উৎসব।', body_en: ['Mehendi Utsob Season 8 was a community celebration — families, volunteers and neighbours sharing an evening together.', 'Community events like this are how BBDC stays close to the neighbourhoods it serves.'] },
+  { slug: 'mehendi-utsob-season-8', en: 'Mehendi Utsob Season 8', bn: 'মেহেদী উৎসব সিজন ৮', img: IMG.mehendi, meta_en: 'Community · Season 8', meta_bn: 'সম্প্রদায় · সিজন ৮', ex_en: 'A community mehendi festival bringing families together in Barishal.', ex_bn: 'বরিশালে পরিবারগুলোকে একত্র করা একটি কমিউনিটি মেহেদী উৎসব।', body_en: ['Mehendi Utsob Season 8 was a community celebration — families, volunteers and neighbours sharing an evening together.', 'Community events like this are how BBDC stays close to the neighbourhoods it serves.'] },
   { slug: 'shahnaz-begum-sewing-machine', en: 'Shahnaz Begum stands on her own', bn: 'শাহনাজ বেগম নিজের পায়ে দাঁড়িয়েছেন', img: IMG.livelihood, meta_en: 'Livelihood · Barishal', meta_bn: 'জীবিকা · বরিশাল', ex_en: 'A sewing machine, and a way to earn for her family.', ex_bn: 'একটি সেলাই মেশিন, এবং পরিবারের জন্য উপার্জনের একটি উপায়।', body_en: ['Shahnaz Begum received a sewing machine through BBDC’s livelihood support. With it, she can take sewing work and earn for her family.', 'This is the kind of practical help the Sewing Machine campaign funds — one machine, one livelihood, one family at a time.'] },
   { slug: 'bells-park-blood-grouping', en: 'Blood grouping at Bells Park', bn: 'বেলস পার্কে রক্তের গ্রুপ নির্ণয়', img: IMG.blood, meta_en: 'Health · Bells Park, Barishal', meta_bn: 'স্বাস্থ্য · বেলস পার্ক, বরিশাল', ex_en: 'A free blood-group testing camp, open to everyone who came by.', ex_bn: 'সবার জন্য উন্মুক্ত একটি বিনামূল্যে রক্তের গ্রুপ নির্ণয় ক্যাম্প।', body_en: ['At Bells Park, BBDC volunteers ran a free blood-group determination camp. People learned their blood group, asked questions, and met the volunteers behind the Blood Donor Network.', 'Knowing your group matters most in an emergency — and it is how many donors first join.'] },
   { slug: 'mohammadpur-cleanliness', en: 'Mohammadpur, cleaner together', bn: 'মোহাম্মদপুর, একসাথে পরিচ্ছন্ন', img: IMG.climate, meta_en: 'Environment · Mohammadpur', meta_bn: 'পরিবেশ · মোহাম্মদপুর', ex_en: 'A neighbourhood cleanliness drive, in its second phase.', ex_bn: 'একটি মহল্লা পরিচ্ছন্নতা অভিযান, দ্বিতীয় ধাপে।', body_en: ['The Mohammadpur cleanliness programme returned for a second phase, with volunteers and residents working side by side to clean streets and shared spaces.', 'Cleanliness work is slow, local and visible — and it is done by the same volunteers who run BBDC’s other programmes.'] },
