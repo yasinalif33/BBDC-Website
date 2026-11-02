@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { SiteProvider } from './context.jsx'
 import { Header, Footer } from './components.jsx'
-import { Home, About, ProgrammesIndex, ProgrammeDetail, CampaignsIndex, CampaignDetail, DonatePage, StoriesIndex, StoryDetail } from './pages1.jsx'
+import { Home, About, ProgrammesIndex, ProgrammeDetail, CampaignsIndex, CampaignDetail, DonatePage, StoriesIndex, StoryDetail, CelebratePage } from './pages1.jsx'
 import { BloodPage, VolunteerPage, TransparencyPage, ContactPage } from './pages2.jsx'
 
 function ScrollToTop() {
@@ -36,6 +36,7 @@ export default function App() {
     <Route path="/campaigns" element={<CampaignsIndex />} />
     <Route path="/campaigns/:slug" element={<CampaignDetail />} />
     <Route path="/donate" element={<DonatePage />} />
+    <Route path="/celebrate" element={<CelebratePage />} />
     <Route path="/stories" element={<StoriesIndex />} />
     <Route path="/stories/:slug" element={<StoryDetail />} />
     <Route path="/blood" element={<BloodPage />} />
