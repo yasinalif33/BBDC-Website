@@ -10,8 +10,25 @@ function ScrollToTop() {
   useEffect(() => { window.scrollTo(0, 0) }, [pathname])
   return null
 }
+function GsapAnimations() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    const gsap = window.gsap
+    if (!gsap || !window.ScrollTrigger) return undefined
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined
+    gsap.registerPlugin(window.ScrollTrigger)
+    const ctx = gsap.context(() => {
+      gsap.from('.hero-video-content > *', { y: 30, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.12, clearProps: 'all' })
+      gsap.utils.toArray('.gsap-item').forEach(el => {
+        gsap.from(el, { y: 28, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'all', scrollTrigger: { trigger: el, start: 'top 88%', once: true } })
+      })
+    })
+    return () => ctx.revert()
+  }, [pathname])
+  return null
+}
 export default function App() {
-  return <SiteProvider><HashRouter><ScrollToTop /><Header /><main className="wrap"><Routes>
+  return <SiteProvider><HashRouter><ScrollToTop /><GsapAnimations /><Header /><main className="wrap"><Routes>
     <Route path="/" element={<Home />} />
     <Route path="/about" element={<About />} />
     <Route path="/programmes" element={<ProgrammesIndex />} />
