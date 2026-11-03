@@ -10,7 +10,7 @@ export const IMG = {
   hero: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?auto=format&fit=crop&w=1400&q=80',
   about: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=80',
   mehendi: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=1200&q=80',
-  blood: 'https://images.unsplash.com/photo-1615461066841-6116e61058fa?auto=format&fit=crop&w=1200&q=80',
+  blood: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Blood_Donation_at_Hospital.jpg',
   health: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80',
   education: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80',
   food: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200&q=80',
