@@ -25,7 +25,7 @@ function HeroArt() {
     <circle cx="430" cy="100" r="62" fill="#f5b301" />
     <circle cx="430" cy="100" r="86" fill="none" stroke="rgba(245,179,1,.35)" strokeWidth="2" />
     <circle cx="430" cy="100" r="112" fill="none" stroke="rgba(255,255,255,.10)" strokeWidth="2" />
-    <path d="M170 60 C 152 92 110 138 110 178 A 60 60 0 1 1 230 178 C 230 138 188 92 170 60 Z" fill="#e03131" />
+    <path d="M170 60 C 152 92 110 138 110 178 A 60 60 0 0 0 230 178 C 230 138 188 92 170 60 Z" fill="#e03131" />
     <ellipse cx="142" cy="172" rx="11" ry="20" fill="rgba(255,255,255,.35)" transform="rotate(-18 142 172)" />
     <path d="M0 300 C 90 270 180 330 280 300 C 380 270 470 330 560 300 L560 380 L0 380 Z" fill="#14524e" />
     <path d="M0 325 C 90 300 180 350 280 325 C 380 300 470 350 560 325 L560 380 L0 380 Z" fill="#14746f" />
