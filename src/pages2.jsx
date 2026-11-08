@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import { useSite } from './context.jsx'
 import { t, Faq, Icon } from './components.jsx'
-import { hrefFor } from './site.js'
+import { hrefFor, currentGroup } from './site.js'
 
 const GROUPS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
 const CAN_RECEIVE = { 'A+': ['A+', 'A-', 'O+', 'O-'], 'A-': ['A-', 'O-'], 'B+': ['B+', 'B-', 'O+', 'O-'], 'B-': ['B-', 'O-'], 'AB+': ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'], 'AB-': ['A-', 'B-', 'AB-', 'O-'], 'O+': ['O+', 'O-'], 'O-': ['O-'] }
@@ -9,7 +9,7 @@ const CAN_GIVE = { 'A+': ['A+', 'AB+'], 'A-': ['A+', 'A-', 'AB+', 'AB-'], 'B+': 
 
 export function BloodPage() {
   const { lang } = useSite(); const u = t(null, lang); const en = lang !== 'bn'
-  const [group, setGroup] = useState('O+'); const [place, setPlace] = useState(''); const [copied, setCopied] = useState(false); const [donor, setDonor] = useState(false)
+  const g0 = currentGroup(); const [group, setGroup] = useState(GROUPS.includes(g0) ? g0 : 'O+'); const [place, setPlace] = useState(''); const [copied, setCopied] = useState(false); const [donor, setDonor] = useState(false)
   const msg = useMemo(() => en ? `Urgent blood request (BBDC): ${group} blood needed in Barishal${place ? ' at ' + place : ''}. If you can donate, please contact BBDC via facebook.com/BBDCaid.` : `জরুরি রক্তের আবেদন (বিবিডিসি): বরিশালে ${group} রক্ত প্রয়োজন${place ? ', ' + place : ''}। দান করতে পারলে facebook.com/BBDCaid-এর মাধ্যমে যোগাযোগ করুন।`, [group, place, en])
   return <div className="section gsap-item"><h1>{u.blood}</h1><p className="lead">{en ? 'Ask for blood in an emergency, or join the donor list. BBDC began as a blood donors’ club, this is still at the heart of its work.' : 'জরুরি প্রয়োজনে রক্ত চান, অথবা দাতা তালিকায় যোগ দিন। বিবিডিসি একটি রক্তদাতা ক্লাব হিসেবে শুরু হয়েছিল, এটি এখনো এর কাজের কেন্দ্রে রয়েছে।'}</p>
     <div className="split"><div className="card"><div className="card-body"><h2>{en ? 'Find blood' : 'রক্ত খুঁজুন'}</h2><label>{en ? 'Blood group needed' : 'প্রয়োজনীয় রক্তের গ্রুপ'}</label><div className="chips">{GROUPS.map(g => <button key={g} className={`chip ${group === g ? 'on' : ''}`} onClick={() => setGroup(g)}>{g}</button>)}</div>
