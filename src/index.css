@@ -84,10 +84,10 @@ nav.main a.active{color:var(--primary);font-weight:500}
 .dropdown.open::after{content:'';position:absolute;top:100%;left:0;width:280px;height:10px}
 .nav-dd-toggle{border:0;background:none;padding:4px;margin-left:-2px;cursor:pointer;color:inherit;display:inline-flex;align-items:center}
 .nav-dd-toggle:hover{color:var(--primary)}
-.dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift);padding:8px;display:none;flex-direction:column;gap:4px;z-index:70}
+.dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift);padding:10px;display:none;flex-direction:column;gap:10px;z-index:70}
 .dropdown.open .dropdown-panel{display:flex}
 nav.main .dropdown:last-child .dropdown-panel{left:auto;right:0}
-.dropdown-panel a{display:block;padding:11px 14px;border-radius:8px;font-size:14px;line-height:20px;white-space:nowrap;color:var(--ink)}
+.dropdown-panel a{display:block;padding:13px 16px;border-radius:8px;font-size:14px;line-height:20px;white-space:nowrap;color:var(--ink)}
 .dropdown-panel a:hover{background:var(--primary-50);color:var(--primary)}
 header.site{z-index:60}
 .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -217,6 +217,9 @@ header.site{z-index:60}
 .way-icon{width:48px;height:48px;min-width:48px;border-radius:12px;background:var(--primary-50);color:var(--primary);display:inline-flex;align-items:center;justify-content:center}
 .split{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
 .sidebar{position:sticky;top:120px}
+/* Sticky text column next to a tall panel (home Donate section): it stays in
+   view while the form scrolls, and clears the fixed header. */
+.sticky-col{position:sticky;top:120px;align-self:start}
 .band{background:#000;color:#fff;border-radius:12px;padding:36px}
 .band h2{color:#fff}
 .band .lead{color:rgba(255,255,255,.85)}
@@ -308,6 +311,7 @@ th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}
   h1{font-size:42px}
   .split{grid-template-columns:1fr}
   .sidebar{position:static}
+  .sticky-col{position:static}
   .footgrid{grid-template-columns:1fr 1fr 1fr}
   .grid3,.grid4{grid-template-columns:1fr 1fr}
   .mobile-menu.open{display:block}
