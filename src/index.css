@@ -74,6 +74,8 @@ nav.main a,nav.main button.navlink{font-size:16px;line-height:22px;letter-spacin
 nav.main a:hover,nav.main button.navlink:hover{color:var(--primary)}
 nav.main a.active{color:var(--primary);font-weight:500}
 .dropdown{position:relative;display:flex;align-items:center;height:48px}
+.nav-dd-toggle{border:0;background:none;padding:4px;margin-left:-2px;cursor:pointer;color:inherit;display:inline-flex;align-items:center}
+.nav-dd-toggle:hover{color:var(--primary)}
 .dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift);padding:8px;display:none;flex-direction:column;z-index:70}
 .dropdown.open .dropdown-panel{display:flex}
 nav.main .dropdown:last-child .dropdown-panel{left:auto;right:0}
@@ -194,7 +196,12 @@ header.site{z-index:60}
 .progress i{display:block;height:100%;background:var(--primary)}
 .progress-note{font-size:14px;color:var(--muted);margin:10px 0 16px;text-align:right}
 
-/* Steps, stats, ways */
+/* Equal-height cards: buttons sit at the bottom of the tallest card, so no
+   card is left with a large empty white area below its button. */
+.eq-cards .card{display:flex;flex-direction:column}
+.eq-cards .card-body{flex:1;display:flex;flex-direction:column}
+.eq-cards .card-body .btn{margin-top:auto}
+.eq-cards .card-body .btn + .btn{margin-top:12px}
 .step-num{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:var(--primary-50);color:var(--primary);font-weight:700;font-size:18px;margin-bottom:12px}
 .stat{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff}
 .stat b{font-size:34px;color:var(--ink);display:block;line-height:1.1;letter-spacing:-1.5px}
