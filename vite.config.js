@@ -12,21 +12,21 @@ const rootDir = path.dirname(fileURLToPath(import.meta.url))
 // page automatically. Titles are per-page.
 function routes() {
   const list = [
-    { path: '/', title: 'BBDC — Beyond Boundaries for Development and Change' },
-    { path: '/about', title: 'About — BBDC' },
-    { path: '/programmes', title: 'Programmes — BBDC' },
-    { path: '/campaigns', title: 'Campaigns — BBDC' },
-    { path: '/donate', title: 'Donate — BBDC' },
+    { path: '/', title: 'BBDC - Beyond Boundaries for Development and Change' },
+    { path: '/about', title: 'About - BBDC' },
+    { path: '/programmes', title: 'Programmes - BBDC' },
+    { path: '/campaigns', title: 'Campaigns - BBDC' },
+    { path: '/donate', title: 'Donate - BBDC' },
     { path: '/celebrate', title: 'Celebrate With BBDC' },
-    { path: '/stories', title: 'Stories — BBDC' },
-    { path: '/blood', title: 'Blood Donor Network — BBDC' },
-    { path: '/volunteer', title: 'Volunteer — BBDC' },
-    { path: '/transparency', title: 'Transparency — BBDC' },
-    { path: '/contact', title: 'Contact — BBDC' },
+    { path: '/stories', title: 'Stories - BBDC' },
+    { path: '/blood', title: 'Blood Donor Network - BBDC' },
+    { path: '/volunteer', title: 'Volunteer - BBDC' },
+    { path: '/transparency', title: 'Transparency - BBDC' },
+    { path: '/contact', title: 'Contact - BBDC' },
   ]
-  for (const p of PROGRAMMES) list.push({ path: `/programmes/${p.slug}`, title: `${p.en} — BBDC` })
-  for (const c of CAMPAIGNS) list.push({ path: `/campaigns/${c.slug}`, title: `${c.en} — BBDC` })
-  for (const s of STORIES) list.push({ path: `/stories/${s.slug}`, title: `${s.en} — BBDC` })
+  for (const p of PROGRAMMES) list.push({ path: `/programmes/${p.slug}`, title: `${p.en} - BBDC` })
+  for (const c of CAMPAIGNS) list.push({ path: `/campaigns/${c.slug}`, title: `${c.en} - BBDC` })
+  for (const s of STORIES) list.push({ path: `/stories/${s.slug}`, title: `${s.en} - BBDC` })
   return list
 }
 
