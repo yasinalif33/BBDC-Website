@@ -23,6 +23,10 @@ export function currentFund() {
   return new URLSearchParams(window.location.search).get('fund')
 }
 
+export function currentGroup() {
+  return new URLSearchParams(window.location.search).get('group')
+}
+
 const STATIC_PAGES = new Set([
   '/', '/about', '/programmes', '/campaigns', '/donate', '/celebrate',
   '/stories', '/blood', '/volunteer', '/transparency', '/contact',
