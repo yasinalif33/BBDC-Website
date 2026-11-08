@@ -40,7 +40,7 @@ export function SmartImage({ src, alt = '', className = '', style }) {
 export function t(ui, lang) { return UI[lang] || UI.en }
 export function AnnouncementBar({ onClose }) {
   const { lang } = useSite()
-  return <div className="announce-bar"><span>{lang === 'bn' ? 'বরিশালের একটি পরিবারের জন্য খাদ্য প্যাক — ৳১,০০০।' : 'A food pack for a family in Barishal — ৳1,000.'}</span><a href={hrefFor('/donate')}>{lang === 'bn' ? 'দান করুন' : 'Donate now'} →</a><button className="announce-close" aria-label="Dismiss" onClick={onClose}>×</button></div>
+  return <div className="announce-bar"><span>{lang === 'bn' ? 'বরিশালের একটি পরিবারের জন্য খাদ্য প্যাক - ৳১,০০০।' : 'A food pack for a family in Barishal - ৳1,000.'}</span><a href={hrefFor('/donate')}>{lang === 'bn' ? 'দান করুন' : 'Donate now'} →</a><button className="announce-close" aria-label="Dismiss" onClick={onClose}>×</button></div>
 }
 export function Header({ overlay = true, announceH = 0 }) {
   const { lang, setLang } = useSite()
@@ -83,7 +83,7 @@ export function Header({ overlay = true, announceH = 0 }) {
   return (
     <div className={`site-header-bar ${stuck ? 'stuck' : ''}`} style={{ top: stuck ? 0 : announceH }}>
       <div className="container-x"><header className="nav-card" style={{ borderColor: overlay && !stuck ? undefined : '#ebebeb' }}>
-        <a href={hrefFor('/')} className="logo" aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></a>
+        <a href={hrefFor('/')} className="logo" aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC - Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></a>
         <nav className="main" aria-label="Main">
           <div className="nav-pill">
             {link('/', u.home)}
@@ -113,13 +113,13 @@ export function Header({ overlay = true, announceH = 0 }) {
 export function Footer() {
   const { lang } = useSite(); const u = t(null, lang)
   return <footer className="site"><div className="wrap footgrid">
-    <div><div className="logo"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img foot-logo" onError={e => { e.currentTarget.style.display = 'none' }} /></div><p className="muted" style={{ marginTop: 16 }}>{lang === 'bn' ? 'বরিশালের একটি স্বেচ্ছাসেবী সংগঠন — ২০১২ সাল থেকে।' : 'A volunteer organisation in Barishal, Bangladesh — since 2012.'}</p><p className="muted" style={{ fontSize: 13 }}>{u.footerNote}</p><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div></div>
+    <div><div className="logo"><img src={LOGO_URL} alt="BBDC - Beyond Boundaries for Development and Change" className="logo-img foot-logo" onError={e => { e.currentTarget.style.display = 'none' }} /></div><p className="muted" style={{ marginTop: 16 }}>{lang === 'bn' ? 'বরিশালের একটি স্বেচ্ছাসেবী সংগঠন, ২০১২ সাল থেকে।' : 'A volunteer organisation in Barishal, Bangladesh, since 2012.'}</p><p className="muted" style={{ fontSize: 13 }}>{u.footerNote}</p><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div></div>
     <div><b>{lang === 'bn' ? 'ঘুরে দেখুন' : 'Explore'}</b><a href={hrefFor('/about')}>{u.about}</a><a href={hrefFor('/programmes')}>{u.programmes}</a><a href={hrefFor('/campaigns')}>{u.campaigns}</a><a href={hrefFor('/stories')}>{u.stories}</a></div>
     <div><b>{lang === 'bn' ? 'দ্রুত লিংক' : 'Quick Links'}</b><a href={hrefFor('/volunteer')}>{u.volunteer}</a><a href={hrefFor('/celebrate')}>{u.celebrate}</a><a href={hrefFor('/donate')}>{u.donate}</a><a href={hrefFor('/contact')}>{u.contact}</a></div>
     <div><b>{u.about}</b><a href={hrefFor('/about')}>{lang === 'bn' ? 'আমরা কারা' : 'Who we are'}</a><a href={hrefFor('/about')}>{lang === 'bn' ? 'আমরা কীভাবে কাজ করি' : 'How BBDC works'}</a><a href={hrefFor('/transparency')}>{u.transparency}</a><a href={hrefFor('/contact')}>{u.contact}</a></div>
     <div><b>{u.ourWork}</b><a href={hrefFor('/programmes')}>{u.programmes}</a><a href={hrefFor('/campaigns')}>{u.campaigns}</a><a href={hrefFor('/blood')}>{u.blood}</a><a href={hrefFor('/stories')}>{u.stories}</a></div>
     <div><b>{u.contact}</b><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a><a href={hrefFor('/contact')}>Barishal, Bangladesh</a><a href={hrefFor('/donate')}>{u.donate}</a></div>
-  </div><div className="foot-bottom"><div className="wrap"><span>© BBDC — Beyond Boundaries for Development and Change</span><span>{REGISTRATION}</span></div></div></footer>
+  </div><div className="foot-bottom"><div className="wrap"><span>© BBDC - Beyond Boundaries for Development and Change</span><span>{REGISTRATION}</span></div></div></footer>
 }
 export function Progress({ raised, goal }) {
   const pct = Math.min(100, Math.round(raised / goal * 100))
@@ -175,7 +175,7 @@ export function DonateWidget({ initialFund }) {
 export function PartnersMarquee() {
   const { lang } = useSite()
   const en = lang !== 'bn'
-  return <div><div className="partners-row" aria-label={en ? 'Partners BBDC has worked with' : 'বিবিডিসি যাদের সঙ্গে কাজ করেছে'}>{PARTNERS.map((p, i) => <div key={i} className="partner-tile" title={p.name}><img src={p.logo} alt={`${p.name} logo`} className="partner-logo" loading="lazy" /></div>)}</div><p className="muted" style={{ fontSize: 13, marginTop: 12 }}>{en ? 'UNICEF logo from UNICEF’s official brand artwork. The government partners share one official mark — the Government of Bangladesh seal, the same mark their own gov.bd sites display. Hover a tile to see that partner’s name.' : 'ইউনিসেফ লোগো ইউনিসেফের অফিসিয়াল ব্র্যান্ড আর্টওয়ার্ক থেকে। সরকারি অংশীদারদের সবার একই অফিসিয়াল চিহ্ন — গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের সিল, যা তাদের নিজস্ব gov.bd সাইটেও দেখানো হয়। কোনো টাইলের উপর মাউস রাখলে সেই অংশীদারের নাম দেখা যাবে।'}</p></div>
+  return <div><div className="partners-row" aria-label={en ? 'Partners BBDC has worked with' : 'বিবিডিসি যাদের সঙ্গে কাজ করেছে'}>{PARTNERS.map((p, i) => <div key={i} className="partner-tile" title={p.name}><img src={p.logo} alt={`${p.name} logo`} className="partner-logo" loading="lazy" /></div>)}</div><p className="muted" style={{ fontSize: 13, marginTop: 12 }}>{en ? 'UNICEF logo from UNICEF’s official brand artwork. The government partners share one official mark, the Government of Bangladesh seal, the same mark their own gov.bd sites display. Hover a tile to see that partner’s name.' : 'ইউনিসেফ লোগো ইউনিসেফের অফিসিয়াল ব্র্যান্ড আর্টওয়ার্ক থেকে। সরকারি অংশীদারদের সবার একই অফিসিয়াল চিহ্ন, গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের সিল, যা তাদের নিজস্ব gov.bd সাইটেও দেখানো হয়। কোনো টাইলের উপর মাউস রাখলে সেই অংশীদারের নাম দেখা যাবে।'}</p></div>
 }
 export function Newsletter() {
   const { lang } = useSite(); const u = t(null, lang); const [ok, setOk] = useState(false)
