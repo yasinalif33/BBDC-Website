@@ -46,8 +46,15 @@ h4{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-1px;margin:0 
 .eyebrow::before{content:'';height:2px;width:24px;background:var(--primary);border-radius:999px;flex:none}
 .eyebrow-dark{color:#fff}.eyebrow-dark::before{background:#fff}
 
-/* Header: SNDC .site-header__bar (absolute, top) + .nav-card (floating white card) */
+/* Header: SNDC .site-header__bar (absolute, top) + .nav-card (floating white card).
+   On scroll the bar pins to the top (fixed) with a solid border, like SNDC. */
 .site-header-bar{position:absolute;top:0;left:0;right:0;z-index:50;padding-top:12px}
+.site-header-bar.stuck{position:fixed;top:0}
+.site-header-bar.stuck .nav-card{border-color:var(--line)}
+.announce-bar{background:var(--primary-50);min-height:40px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;color:var(--ink);padding:6px 44px 6px 16px;position:relative;text-align:center}
+.announce-bar a{color:var(--primary);font-weight:600;white-space:nowrap}
+.announce-bar a:hover{text-decoration:underline}
+.announce-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:18px;line-height:1;cursor:pointer;color:var(--muted);padding:4px 8px}
 @media(min-width:640px){.site-header-bar{padding-top:24px}}
 .header-spacer{background:var(--surface-2);height:96px}
 @media(min-width:640px){.header-spacer{height:134px}}
@@ -136,11 +143,13 @@ header.site{z-index:60}
 .hero-video-credit{font-size:13px;color:rgba(255,255,255,.8);margin-top:24px}
 @media(prefers-reduced-motion:reduce){.hero-video-media iframe{display:none}}
 
-/* Ticker: SNDC impact ticker, white strip with big numbers */
-.ticker{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0;display:flex;gap:24px;flex-wrap:wrap;justify-content:space-between}
-.ticker span{font-size:14px;color:var(--muted)}
-.ticker b{display:block;font-size:32px;line-height:42px;font-weight:700;letter-spacing:-1.5px;color:var(--ink)}
-@media(min-width:768px){.ticker b{font-size:40px;line-height:48px}}
+/* Ticker: SNDC impact ticker, a looping marquee, white strip, icon + number + label inline */
+.ticker{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ticker-track{display:flex;gap:48px;width:max-content;animation:marquee 32s linear infinite}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font-size:16px;color:var(--muted)}
+.ticker-item svg{color:var(--primary);flex:none}
+.ticker-item b{font-size:20px;line-height:1;font-weight:700;letter-spacing:-.5px;color:var(--ink)}
 
 /* Cards: SNDC radius 12, 1px line, shadow-card on hover */
 .card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
@@ -173,7 +182,7 @@ header.site{z-index:60}
 .prog-row-body h3{font-size:24px;line-height:32px;margin-bottom:4px}
 @media(min-width:768px){.prog-row-body h3{font-size:28px;line-height:34px}}
 .prog-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-.prog-tag{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;background:var(--primary-50);color:var(--primary);font-size:13px;font-weight:500}
+.prog-tag{display:inline-flex;align-items:center;height:30px;padding:6px 12px;border-radius:8px;background:#fff;border:1px solid #e5e7eb;color:#374151;font-size:13px;font-weight:500}
 .support-link{display:inline-flex;align-items:center;gap:8px;font-weight:500;color:var(--primary);margin-top:8px}
 .support-link:hover{text-decoration:underline}
 
@@ -181,9 +190,9 @@ header.site{z-index:60}
 .raised-box{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:16px;display:flex;justify-content:space-between;gap:16px;margin:16px 0 12px}
 .raised-box span{font-size:14px;color:var(--muted)}
 .raised-box b{display:block;font-size:18px;color:var(--ink);margin-top:2px}
-.progress{height:6px;background:var(--primary-50);border-radius:999px;overflow:hidden}
+.progress{height:6px;background:#e5e7eb;border-radius:999px;overflow:hidden}
 .progress i{display:block;height:100%;background:var(--primary)}
-.progress-note{font-size:14px;color:var(--muted);margin:10px 0 16px}
+.progress-note{font-size:14px;color:var(--muted);margin:10px 0 16px;text-align:right}
 
 /* Steps, stats, ways */
 .step-num{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:var(--primary-50);color:var(--primary);font-weight:700;font-size:18px;margin-bottom:12px}
@@ -202,12 +211,12 @@ header.site{z-index:60}
 
 /* Donate form panel: SNDC white form panel on pale blue */
 .donate-panel{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-card);padding:28px}
-.field{width:100%;height:48px;padding:0 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+.field{width:100%;height:56px;padding:0 14px;border:1px solid #d1d5db;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
 textarea.field{height:auto;padding:12px 14px}
 .field:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
 label{display:block;font-weight:500;font-size:14px;margin:16px 0 6px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{min-height:48px;padding:9px 16px;border-radius:12px;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:500;font-size:14px;color:var(--ink)}
+.chip{min-height:52px;padding:9px 16px;border-radius:8px;border:1px solid #d1d5db;background:#fff;cursor:pointer;font-weight:500;font-size:14px;color:var(--ink)}
 .chip:hover{border-color:var(--primary);color:var(--primary)}
 .chip.on{background:var(--primary);color:#fff;border-color:var(--primary)}
 .faq{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff}
@@ -253,7 +262,7 @@ label{display:block;font-weight:500;font-size:14px;margin:16px 0 6px}
 
 /* Footer: SNDC black footer, outline-square socials, bottom bar */
 footer.site{background:#000;color:#fff;margin-top:0;padding:56px 0 0}
-.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px}
+.footgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 1fr;gap:24px}
 footer a{display:block;padding:4px 0;color:rgba(255,255,255,.8)}
 footer a:hover{color:#fff}
 footer.site b{color:#fff}
@@ -276,7 +285,7 @@ th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}
   h1{font-size:42px}
   .split{grid-template-columns:1fr}
   .sidebar{position:static}
-  .footgrid{grid-template-columns:1fr 1fr}
+  .footgrid{grid-template-columns:1fr 1fr 1fr}
   .grid3,.grid4{grid-template-columns:1fr 1fr}
   .mobile-menu.open{display:block}
 }
@@ -293,8 +302,9 @@ th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}
   .grid3,.grid4,.grid2{grid-template-columns:1fr}
   .card-img{height:220px}
   .card-body{padding:20px}
-  .ticker{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:20px 0}
-  .ticker b{font-size:28px;line-height:34px}
+  .ticker-track{gap:32px}
+  .ticker-item{font-size:15px}
+  .ticker-item b{font-size:18px}
   .footgrid{grid-template-columns:1fr}
   footer.site{padding:40px 0 0}
   .btn{padding-inline:20px}
