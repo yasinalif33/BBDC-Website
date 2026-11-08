@@ -53,15 +53,23 @@ export function Header({ overlay = true, announceH = 0 }) {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [announceH])
+  // Clicking anywhere outside a dropdown closes it (touch users have no hover).
+  useEffect(() => {
+    const close = (e) => { if (!e.target.closest('.dropdown')) setOpen(null) }
+    document.addEventListener('mousedown', close)
+    return () => document.removeEventListener('mousedown', close)
+  }, [])
   const closeAll = () => { setMobile(false); setOpen(null) }
   const path = currentPath()
   const link = (to, label) => <a key={to} href={hrefFor(to)} className={path === to ? 'active' : ''}>{label}</a>
   // Like SNDC: the label itself is a real link to the section page, and only
   // the small chevron button opens the dropdown. Clicking the label always navigates.
+  // The chevron always OPENS (never toggles closed): hovering already opens the
+  // menu, so a toggle would close it again on the same click.
   const drop = (key, label, to, items) => (
     <div className={`dropdown ${open === key ? 'open' : ''}`} onMouseEnter={() => setOpen(key)} onMouseLeave={() => setOpen(null)}>
       <a className={`navlink ${items.some(i => i.to === path) ? 'active' : ''}`} href={hrefFor(to)}>{label}</a>
-      <button type="button" className="nav-dd-toggle" aria-expanded={open === key} aria-haspopup="true" aria-label={`Show ${label} menu`} onClick={() => setOpen(open === key ? null : key)}><Icon name="chev" size={14} /></button>
+      <button type="button" className="nav-dd-toggle" aria-expanded={open === key} aria-haspopup="true" aria-label={`Show ${label} menu`} onClick={() => setOpen(key)}><Icon name="chev" size={14} /></button>
       <div className="dropdown-panel">{items.map(i => <a key={i.to} href={hrefFor(i.to)}>{i.label}</a>)}</div>
     </div>
   )
@@ -100,7 +108,7 @@ export function Footer() {
   return <footer className="site"><div className="wrap footgrid">
     <div><div className="logo"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img foot-logo" onError={e => { e.currentTarget.style.display = 'none' }} /></div><p className="muted" style={{ marginTop: 16 }}>{lang === 'bn' ? 'বরিশালের একটি স্বেচ্ছাসেবী সংগঠন — ২০১২ সাল থেকে।' : 'A volunteer organisation in Barishal, Bangladesh — since 2012.'}</p><p className="muted" style={{ fontSize: 13 }}>{u.footerNote}</p><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div></div>
     <div><b>{lang === 'bn' ? 'ঘুরে দেখুন' : 'Explore'}</b><a href={hrefFor('/about')}>{u.about}</a><a href={hrefFor('/programmes')}>{u.programmes}</a><a href={hrefFor('/campaigns')}>{u.campaigns}</a><a href={hrefFor('/stories')}>{u.stories}</a></div>
-    <div><b>{lang === 'bn' ? 'দ্রুত লিংক' : 'Quick Links'}</b><a href={hrefFor('/volunteer')}>{u.volunteer}</a><a href={hrefFor('/celebrate')}>{u.celebrate}</a><a href={hrefFor('/donate')}>{u.donate}</a><a href={hrefFor('/transparency')}>{u.transparency}</a></div>
+    <div><b>{lang === 'bn' ? 'দ্রুত লিংক' : 'Quick Links'}</b><a href={hrefFor('/volunteer')}>{u.volunteer}</a><a href={hrefFor('/celebrate')}>{u.celebrate}</a><a href={hrefFor('/donate')}>{u.donate}</a><a href={hrefFor('/contact')}>{u.contact}</a></div>
     <div><b>{u.about}</b><a href={hrefFor('/about')}>{lang === 'bn' ? 'আমরা কারা' : 'Who we are'}</a><a href={hrefFor('/about')}>{lang === 'bn' ? 'আমরা কীভাবে কাজ করি' : 'How BBDC works'}</a><a href={hrefFor('/transparency')}>{u.transparency}</a><a href={hrefFor('/contact')}>{u.contact}</a></div>
     <div><b>{u.ourWork}</b><a href={hrefFor('/programmes')}>{u.programmes}</a><a href={hrefFor('/campaigns')}>{u.campaigns}</a><a href={hrefFor('/blood')}>{u.blood}</a><a href={hrefFor('/stories')}>{u.stories}</a></div>
     <div><b>{u.contact}</b><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a><a href={hrefFor('/contact')}>Barishal, Bangladesh</a><a href={hrefFor('/donate')}>{u.donate}</a></div>
@@ -160,8 +168,7 @@ export function DonateWidget({ initialFund }) {
 export function PartnersMarquee() {
   const { lang } = useSite()
   const en = lang !== 'bn'
-  const tiles = [...PARTNERS, ...PARTNERS]
-  return <div><div className="marquee" aria-label={en ? 'Partners BBDC has worked with' : 'বিবিডিসি যাদের সঙ্গে কাজ করেছে'}><div className="marquee-track">{tiles.map((p, i) => <div key={i} className="partner-tile" title={p.name} aria-hidden={i >= PARTNERS.length}><img src={p.logo} alt={`${p.name} logo`} className="partner-logo" loading="lazy" /></div>)}</div></div><p className="muted" style={{ fontSize: 13, marginTop: 12 }}>{en ? 'UNICEF logo from UNICEF’s official brand artwork. The government partners share one official mark — the Government of Bangladesh seal, the same mark their own gov.bd sites display. Hover a tile to see that partner’s name.' : 'ইউনিসেফ লোগো ইউনিসেফের অফিসিয়াল ব্র্যান্ড আর্টওয়ার্ক থেকে। সরকারি অংশীদারদের সবার একই অফিসিয়াল চিহ্ন — গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের সিল, যা তাদের নিজস্ব gov.bd সাইটেও দেখানো হয়। কোনো টাইলের উপর মাউস রাখলে সেই অংশীদারের নাম দেখা যাবে।'}</p></div>
+  return <div><div className="partners-row" aria-label={en ? 'Partners BBDC has worked with' : 'বিবিডিসি যাদের সঙ্গে কাজ করেছে'}>{PARTNERS.map((p, i) => <div key={i} className="partner-tile" title={p.name}><img src={p.logo} alt={`${p.name} logo`} className="partner-logo" loading="lazy" /></div>)}</div><p className="muted" style={{ fontSize: 13, marginTop: 12 }}>{en ? 'UNICEF logo from UNICEF’s official brand artwork. The government partners share one official mark — the Government of Bangladesh seal, the same mark their own gov.bd sites display. Hover a tile to see that partner’s name.' : 'ইউনিসেফ লোগো ইউনিসেফের অফিসিয়াল ব্র্যান্ড আর্টওয়ার্ক থেকে। সরকারি অংশীদারদের সবার একই অফিসিয়াল চিহ্ন — গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের সিল, যা তাদের নিজস্ব gov.bd সাইটেও দেখানো হয়। কোনো টাইলের উপর মাউস রাখলে সেই অংশীদারের নাম দেখা যাবে।'}</p></div>
 }
 export function Newsletter() {
   const { lang } = useSite(); const u = t(null, lang); const [ok, setOk] = useState(false)
