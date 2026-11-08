@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSite, pick } from './context.jsx'
 import { UI, FUNDS, LOGO_URL, REGISTRATION, SOCIALS, PARTNERS } from './data.js'
 import { hrefFor, currentPath } from './site.js'
@@ -47,6 +47,13 @@ export function Header({ overlay = true, announceH = 0 }) {
   const u = t(null, lang)
   const [mobile, setMobile] = useState(false); const [open, setOpen] = useState(null)
   const [stuck, setStuck] = useState(false)
+  const closeTimer = useRef(null)
+  // Closing on mouse-leave waits 150ms: a diagonal move from the chevron to
+  // a panel link briefly leaves the menu, and the delay lets the pointer
+  // reach the panel before anything closes. Re-entering cancels the close.
+  const cancelClose = () => { if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null } }
+  const scheduleClose = () => { cancelClose(); closeTimer.current = setTimeout(() => setOpen(null), 150) }
+  useEffect(() => () => { if (closeTimer.current) clearTimeout(closeTimer.current) }, [])
   useEffect(() => {
     const onScroll = () => setStuck(window.scrollY > Math.max(10, announceH))
     onScroll()
@@ -67,7 +74,7 @@ export function Header({ overlay = true, announceH = 0 }) {
   // The chevron always OPENS (never toggles closed): hovering already opens the
   // menu, so a toggle would close it again on the same click.
   const drop = (key, label, to, items) => (
-    <div className={`dropdown ${open === key ? 'open' : ''}`} onMouseEnter={() => setOpen(key)} onMouseLeave={() => setOpen(null)}>
+    <div className={`dropdown ${open === key ? 'open' : ''}`} onMouseEnter={() => { cancelClose(); setOpen(key) }} onMouseLeave={() => scheduleClose()}>
       <a className={`navlink ${items.some(i => i.to === path) ? 'active' : ''}`} href={hrefFor(to)}>{label}</a>
       <button type="button" className="nav-dd-toggle" aria-expanded={open === key} aria-haspopup="true" aria-label={`Show ${label} menu`} onClick={() => setOpen(key)}><Icon name="chev" size={14} /></button>
       <div className="dropdown-panel">{items.map(i => <a key={i.to} href={hrefFor(i.to)}>{i.label}</a>)}</div>
