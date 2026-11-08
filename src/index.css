@@ -78,8 +78,10 @@ nav.main a:hover,nav.main button.navlink:hover{color:var(--primary)}
 nav.main a.active{color:var(--primary);font-weight:500}
 .dropdown{position:relative;display:flex;align-items:center;height:48px}
 /* Invisible bridge over the 10px gap between the bar and the panel, so the
-   menu does not close while the mouse travels down to a link. */
-.dropdown.open::after{content:'';position:absolute;top:100%;left:0;right:0;height:10px}
+   menu does not close while the mouse travels down to a link. It is as wide
+   as the panel (280px), not just the label, because a diagonal move to a
+   link can leave the narrow label behind. */
+.dropdown.open::after{content:'';position:absolute;top:100%;left:0;width:280px;height:10px}
 .nav-dd-toggle{border:0;background:none;padding:4px;margin-left:-2px;cursor:pointer;color:inherit;display:inline-flex;align-items:center}
 .nav-dd-toggle:hover{color:var(--primary)}
 .dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift);padding:8px;display:none;flex-direction:column;gap:4px;z-index:70}
