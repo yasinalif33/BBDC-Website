@@ -1,6 +1,6 @@
 # BBDC Website
 
-BBDC — **Beyond Boundaries for Development and Change** — a volunteer organisation in Barishal, Bangladesh, founded in 2012 as the Barishal Blood Donors Club and rebranded in 2025.
+BBDC - **Beyond Boundaries for Development and Change**, a volunteer organisation in Barishal, Bangladesh, founded in 2012 as the Barishal Blood Donors Club and rebranded in 2025.
 
 This is a complete React.js (Vite) frontend for the new BBDC website. It replaces the old WordPress/Elementor site in design, with a multi-page structure, a prominent donation flow, a blood-donor network, volunteer sign-up, and English/Bengali language support.
 
@@ -27,7 +27,7 @@ The production output is in `dist/`.
 
 This repo ships a GitHub Actions workflow at `.github/workflows/deploy.yml`. It builds the site and deploys it to GitHub Pages.
 
-**Important — one manual step in the repo:** in the GitHub repository, go to **Settings → Pages** and set **Source: GitHub Actions**. Without this, the workflow cannot publish, and the Pages URL above will not update.
+**Important, one manual step in the repo:** in the GitHub repository, go to **Settings → Pages** and set **Source: GitHub Actions**. Without this, the workflow cannot publish, and the Pages URL above will not update.
 
 The workflow uses `npm ci` + `npm run build`, then `upload-pages-artifact` and `deploy-pages`, with `pages: write`, `id-token: write` and `contents: read` permissions.
 
