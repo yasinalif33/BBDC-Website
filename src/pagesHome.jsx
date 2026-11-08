@@ -25,14 +25,14 @@ function HeroArt() {
     <circle cx="430" cy="100" r="62" fill="#f5b301" />
     <circle cx="430" cy="100" r="86" fill="none" stroke="rgba(245,179,1,.35)" strokeWidth="2" />
     <circle cx="430" cy="100" r="112" fill="none" stroke="rgba(255,255,255,.10)" strokeWidth="2" />
-    <path d="M170 55 C 170 55 108 138 108 180 A 62 62 0 1 1 232 180 C 232 138 170 55 170 55 Z" fill="#e03131" />
-    <ellipse cx="148" cy="178" rx="12" ry="22" fill="rgba(255,255,255,.35)" transform="rotate(-18 148 178)" />
+    <path d="M170 60 C 152 92 110 138 110 178 A 60 60 0 1 1 230 178 C 230 138 188 92 170 60 Z" fill="#e03131" />
+    <ellipse cx="142" cy="172" rx="11" ry="20" fill="rgba(255,255,255,.35)" transform="rotate(-18 142 172)" />
     <path d="M0 300 C 90 270 180 330 280 300 C 380 270 470 330 560 300 L560 380 L0 380 Z" fill="#14524e" />
     <path d="M0 325 C 90 300 180 350 280 325 C 380 300 470 350 560 325 L560 380 L0 380 Z" fill="#14746f" />
     <path d="M0 350 C 90 330 180 368 280 350 C 380 330 470 368 560 350 L560 380 L0 380 Z" fill="#0a2e2d" />
-    <path d="M330 318 L430 318 L410 340 L350 340 Z" fill="#ffffff" />
-    <rect x="378" y="268" width="4" height="52" fill="#ffffff" />
-    <path d="M382 268 L412 278 L382 288 Z" fill="#e03131" />
+    <path d="M330 268 L430 268 L412 290 L348 290 Z" fill="#ffffff" />
+    <rect x="378" y="220" width="4" height="50" fill="#ffffff" />
+    <path d="M382 220 L412 230 L382 240 Z" fill="#e03131" />
   </svg>
 }
 
