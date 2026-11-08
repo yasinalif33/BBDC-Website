@@ -1,7 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { SiteProvider } from './context.jsx'
-import { Header, Footer } from './components.jsx'
+import { Header, Footer, AnnouncementBar } from './components.jsx'
 import { Home } from './pagesHome.jsx'
 import { About, ProgrammesIndex, ProgrammeDetail, CampaignsIndex, CampaignDetail, DonatePage, StoriesIndex, StoryDetail, CelebratePage } from './pages1.jsx'
 import { BloodPage, VolunteerPage, TransparencyPage, ContactPage } from './pages2.jsx'
@@ -31,8 +31,11 @@ function GsapAnimations() {
 function Shell() {
   const { pathname } = useLocation()
   const isHome = pathname === '/'
+  const [showAnnounce, setShowAnnounce] = useState(true)
+  const announceH = showAnnounce ? 40 : 0
   return <>
-    <Header overlay={isHome} />
+    {showAnnounce && <AnnouncementBar onClose={() => setShowAnnounce(false)} />}
+    <Header overlay={isHome} announceH={announceH} />
     {!isHome && <div className="header-spacer" />}
     <main className="wrap"><Routes>
       <Route path="/" element={<Home />} />
