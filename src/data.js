@@ -15,6 +15,8 @@ export const IMG = {
   education: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1200&q=80',
   food: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200&q=80',
   livelihood: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80',
+  sewing: 'https://images.unsplash.com/photo-1584992236310-6edddc08acff?auto=format&fit=crop&w=1200&q=80',
+  celebrate: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1200&q=80',
   climate: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1200&q=80',
   disaster: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?auto=format&fit=crop&w=1200&q=80',
   awareness: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=80',
@@ -51,7 +53,7 @@ export const PROGRAMMES = [
 export const CAMPAIGNS = [
   { slug: 'emergency-relief-food', fund: 'food', en: 'Emergency Relief & Food', bn: 'জরুরি ত্রাণ ও খাদ্য', img: IMG.food, raised: 68000, goal: 200000, unit_en: '৳1,000 can stock a family food pack (illustrative preview figure)', unit_bn: '৳১,০০০-এ একটি পরিবারের খাদ্য প্যাক (উদাহরণমূলক) ', desc_en: 'Food packs and essentials for families facing hardship or an emergency in Barishal.', desc_bn: 'বরিশালে কষ্টে থাকা বা জরুরি পরিস্থিতিতে পড়া পরিবারের জন্য খাদ্য প্যাক ও প্রয়োজনীয় সামগ্রী।' },
   { slug: 'back-to-school', fund: 'education', en: 'Back to School', bn: 'স্কুলে ফিরে যাওয়া', img: IMG.education, raised: 45000, goal: 150000, unit_en: '৳1,500 can cover a full school kit (illustrative preview figure)', unit_bn: '৳১,৫০০-এ একটি সম্পূর্ণ স্কুল কিট (উদাহরণমূলক)', desc_en: 'Bags, books, uniforms and learning materials for children returning to school.', desc_bn: 'স্কুলে ফেরা শিশুদের জন্য ব্যাগ, বই, ইউনিফর্ম ও শিক্ষা উপকরণ।' },
-  { slug: 'sewing-machine', fund: 'livelihood', en: 'Sewing Machine', bn: 'সেলাই মেশিন', img: IMG.livelihood, raised: 36000, goal: 120000, unit_en: '৳12,000 can fully fund one sewing machine (illustrative preview figure)', unit_bn: '৳১২,০০০-এ একটি সেলাই মেশিন (উদাহরণমূলক)', desc_en: 'Sewing machines that help people start earning for their families with dignity.', desc_bn: 'সেলাই মেশিন যা মানুষকে মর্যাদার সঙ্গে পরিবারের জন্য উপার্জন শুরু করতে সাহায্য করে।' },
+  { slug: 'sewing-machine', fund: 'livelihood', en: 'Sewing Machine', bn: 'সেলাই মেশিন', img: IMG.sewing, raised: 36000, goal: 120000, unit_en: '৳12,000 can fully fund one sewing machine (illustrative preview figure)', unit_bn: '৳১২,০০০-এ একটি সেলাই মেশিন (উদাহরণমূলক)', desc_en: 'Sewing machines that help people start earning for their families with dignity.', desc_bn: 'সেলাই মেশিন যা মানুষকে মর্যাদার সঙ্গে পরিবারের জন্য উপার্জন শুরু করতে সাহায্য করে।' },
   { slug: 'eider-hashi-season-5', fund: 'food', en: 'Eid-er Hashi Season 5', bn: 'ঈদের হাসি সিজন ৫', img: IMG.story, raised: 24000, goal: 80000, unit_en: '৳800 can cover one Eid outfit set (illustrative preview figure)', unit_bn: '৳৮০০-এ একটি ঈদ পোশাক সেট (উদাহরণমূলক)', desc_en: 'Eid gifts and joy for families in Barishal — the open season of BBDC’s Eid-er Hashi giving.', desc_bn: 'বরিশালের পরিবারের জন্য ঈদ উপহার ও আনন্দ — বিবিডিসির ঈদের হাসির চলমান সিজন।' },
 ]
 export const STORIES = [
