@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSite, pick } from './context.jsx'
 import { UI, FUNDS, LOGO_URL, REGISTRATION, SOCIALS, PARTNERS } from './data.js'
@@ -38,10 +38,21 @@ export function SmartImage({ src, alt = '', className = '', style }) {
   return <img src={src} alt={alt} className={className} style={style} onError={() => setErr(true)} loading="lazy" />
 }
 export function t(ui, lang) { return UI[lang] || UI.en }
-export function Header({ overlay = true }) {
+export function AnnouncementBar({ onClose }) {
+  const { lang } = useSite()
+  return <div className="announce-bar"><span>{lang === 'bn' ? 'বরিশালের একটি পরিবারের জন্য খাদ্য প্যাক — ৳১,০০০।' : 'A food pack for a family in Barishal — ৳1,000.'}</span><Link to="/donate">{lang === 'bn' ? 'দান করুন' : 'Donate now'} →</Link><button className="announce-close" aria-label="Dismiss" onClick={onClose}>×</button></div>
+}
+export function Header({ overlay = true, announceH = 0 }) {
   const { lang, setLang } = useSite()
   const u = t(null, lang); const nav = useNavigate()
   const [mobile, setMobile] = useState(false); const [open, setOpen] = useState(null)
+  const [stuck, setStuck] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setStuck(window.scrollY > Math.max(10, announceH))
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [announceH])
   const closeAll = () => { setMobile(false); setOpen(null) }
   const link = (to, label) => <NavLink key={to} to={to} onClick={closeAll} className={({ isActive }) => isActive ? 'active' : ''}>{label}</NavLink>
   const drop = (key, label, items) => (
@@ -51,7 +62,7 @@ export function Header({ overlay = true }) {
     </div>
   )
   return (
-    <div className="site-header-bar">
+    <div className={`site-header-bar ${stuck ? 'stuck' : ''}`} style={{ top: stuck ? 0 : announceH }}>
       <div className="container-x"><header className={`nav-card ${overlay ? '' : 'site-header--solid'}`} style={{ borderColor: overlay ? undefined : '#ebebeb' }}>
         <Link to="/" className="logo" onClick={closeAll} aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></Link>
         <nav className="main" aria-label="Main">
@@ -84,9 +95,11 @@ export function Footer() {
   const { lang } = useSite(); const u = t(null, lang)
   return <footer className="site"><div className="wrap footgrid">
     <div><div className="logo"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img foot-logo" onError={e => { e.currentTarget.style.display = 'none' }} /></div><p className="muted" style={{ marginTop: 16 }}>{lang === 'bn' ? 'বরিশালের একটি স্বেচ্ছাসেবী সংগঠন — ২০১২ সাল থেকে।' : 'A volunteer organisation in Barishal, Bangladesh — since 2012.'}</p><p className="muted" style={{ fontSize: 13 }}>{u.footerNote}</p><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div></div>
-    <div><b>{lang === 'bn' ? 'ঘুরে দেখুন' : 'Explore'}</b><Link to="/programmes">{u.programmes}</Link><Link to="/campaigns">{u.campaigns}</Link><Link to="/stories">{u.stories}</Link><Link to="/blood">{u.blood}</Link></div>
+    <div><b>{lang === 'bn' ? 'ঘুরে দেখুন' : 'Explore'}</b><Link to="/about">{u.about}</Link><Link to="/programmes">{u.programmes}</Link><Link to="/campaigns">{u.campaigns}</Link><Link to="/stories">{u.stories}</Link></div>
     <div><b>{lang === 'bn' ? 'দ্রুত লিংক' : 'Quick Links'}</b><Link to="/volunteer">{u.volunteer}</Link><Link to="/celebrate">{u.celebrate}</Link><Link to="/donate">{u.donate}</Link><Link to="/transparency">{u.transparency}</Link></div>
-    <div><b>{u.contact}</b><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a><Link to="/contact">Barishal, Bangladesh</Link><Link to="/about">{u.about}</Link></div>
+    <div><b>{u.about}</b><Link to="/about">{lang === 'bn' ? 'আমরা কারা' : 'Who we are'}</Link><Link to="/about">{lang === 'bn' ? 'আমরা কীভাবে কাজ করি' : 'How BBDC works'}</Link><Link to="/transparency">{u.transparency}</Link><Link to="/contact">{u.contact}</Link></div>
+    <div><b>{u.ourWork}</b><Link to="/programmes">{u.programmes}</Link><Link to="/campaigns">{u.campaigns}</Link><Link to="/blood">{u.blood}</Link><Link to="/stories">{u.stories}</Link></div>
+    <div><b>{u.contact}</b><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a><Link to="/contact">Barishal, Bangladesh</Link><Link to="/donate">{u.donate}</Link></div>
   </div><div className="foot-bottom"><div className="wrap"><span>© BBDC — Beyond Boundaries for Development and Change</span><span>{REGISTRATION}</span></div></div></footer>
 }
 export function Progress({ raised, goal }) {
