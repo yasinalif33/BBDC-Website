@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useSite, pick } from './context.jsx'
 import { UI, FUNDS, LOGO_URL, REGISTRATION, SOCIALS, PARTNERS } from './data.js'
+import { hrefFor, currentPath } from './site.js'
 
 export function Icon({ name, size = 20 }) {
   const p = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round', width: size, height: size, viewBox: '0 0 24 24', 'aria-hidden': true }
@@ -40,11 +40,11 @@ export function SmartImage({ src, alt = '', className = '', style }) {
 export function t(ui, lang) { return UI[lang] || UI.en }
 export function AnnouncementBar({ onClose }) {
   const { lang } = useSite()
-  return <div className="announce-bar"><span>{lang === 'bn' ? 'বরিশালের একটি পরিবারের জন্য খাদ্য প্যাক — ৳১,০০০।' : 'A food pack for a family in Barishal — ৳1,000.'}</span><Link to="/donate">{lang === 'bn' ? 'দান করুন' : 'Donate now'} →</Link><button className="announce-close" aria-label="Dismiss" onClick={onClose}>×</button></div>
+  return <div className="announce-bar"><span>{lang === 'bn' ? 'বরিশালের একটি পরিবারের জন্য খাদ্য প্যাক — ৳১,০০০।' : 'A food pack for a family in Barishal — ৳1,000.'}</span><a href={hrefFor('/donate')}>{lang === 'bn' ? 'দান করুন' : 'Donate now'} →</a><button className="announce-close" aria-label="Dismiss" onClick={onClose}>×</button></div>
 }
 export function Header({ overlay = true, announceH = 0 }) {
   const { lang, setLang } = useSite()
-  const u = t(null, lang); const nav = useNavigate()
+  const u = t(null, lang)
   const [mobile, setMobile] = useState(false); const [open, setOpen] = useState(null)
   const [stuck, setStuck] = useState(false)
   useEffect(() => {
@@ -54,37 +54,41 @@ export function Header({ overlay = true, announceH = 0 }) {
     return () => window.removeEventListener('scroll', onScroll)
   }, [announceH])
   const closeAll = () => { setMobile(false); setOpen(null) }
-  const link = (to, label) => <NavLink key={to} to={to} onClick={closeAll} className={({ isActive }) => isActive ? 'active' : ''}>{label}</NavLink>
-  const drop = (key, label, items) => (
+  const path = currentPath()
+  const link = (to, label) => <a key={to} href={hrefFor(to)} className={path === to ? 'active' : ''}>{label}</a>
+  // Like SNDC: the label itself is a real link to the section page, and only
+  // the small chevron button opens the dropdown. Clicking the label always navigates.
+  const drop = (key, label, to, items) => (
     <div className={`dropdown ${open === key ? 'open' : ''}`} onMouseEnter={() => setOpen(key)} onMouseLeave={() => setOpen(null)}>
-      <button className="navlink" aria-expanded={open === key} aria-haspopup="true" onClick={() => setOpen(open === key ? null : key)}>{label} <Icon name="chev" size={14} /></button>
-      <div className="dropdown-panel">{items.map(i => <Link key={i.to} to={i.to} onClick={closeAll}>{i.label}</Link>)}</div>
+      <a className={`navlink ${items.some(i => i.to === path) ? 'active' : ''}`} href={hrefFor(to)}>{label}</a>
+      <button type="button" className="nav-dd-toggle" aria-expanded={open === key} aria-haspopup="true" aria-label={`Show ${label} menu`} onClick={() => setOpen(open === key ? null : key)}><Icon name="chev" size={14} /></button>
+      <div className="dropdown-panel">{items.map(i => <a key={i.to} href={hrefFor(i.to)}>{i.label}</a>)}</div>
     </div>
   )
   return (
     <div className={`site-header-bar ${stuck ? 'stuck' : ''}`} style={{ top: stuck ? 0 : announceH }}>
-      <div className="container-x"><header className={`nav-card ${overlay ? '' : 'site-header--solid'}`} style={{ borderColor: overlay ? undefined : '#ebebeb' }}>
-        <Link to="/" className="logo" onClick={closeAll} aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></Link>
+      <div className="container-x"><header className="nav-card" style={{ borderColor: overlay && !stuck ? undefined : '#ebebeb' }}>
+        <a href={hrefFor('/')} className="logo" aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></a>
         <nav className="main" aria-label="Main">
           <div className="nav-pill">
             {link('/', u.home)}
-            {drop('about', u.about, [{ to: '/about', label: u.about }, { to: '/transparency', label: u.transparency }])}
-            {drop('work', u.ourWork, [{ to: '/programmes', label: u.programmes }, { to: '/campaigns', label: u.campaigns }, { to: '/stories', label: u.stories }])}
-            {drop('involved', u.getInvolved, [{ to: '/volunteer', label: u.volunteer }, { to: '/blood', label: u.blood }, { to: '/celebrate', label: u.celebrate }])}
+            {drop('about', u.about, '/about', [{ to: '/about', label: u.about }, { to: '/transparency', label: u.transparency }])}
+            {drop('work', u.ourWork, '/programmes', [{ to: '/programmes', label: u.programmes }, { to: '/campaigns', label: u.campaigns }, { to: '/stories', label: u.stories }])}
+            {drop('involved', u.getInvolved, '/volunteer', [{ to: '/volunteer', label: u.volunteer }, { to: '/blood', label: u.blood }, { to: '/celebrate', label: u.celebrate }])}
             {link('/contact', u.contact)}
           </div>
         </nav>
         <div className="actions">
           <button className="langbtn" aria-label="Toggle language" onClick={() => setLang(lang === 'en' ? 'bn' : 'en')}>{lang === 'en' ? 'বাংলা' : 'EN'}</button>
-          <Link to="/volunteer" className="btn btn-secondary btn-sm" onClick={closeAll} style={{ display: 'inline-flex' }}>{u.join}</Link>
-          <Link to="/donate" className="btn btn-primary btn-sm" onClick={closeAll}>{u.donate}</Link>
+          <a href={hrefFor('/volunteer')} className="btn btn-secondary btn-sm" style={{ display: 'inline-flex' }}>{u.join}</a>
+          <a href={hrefFor('/donate')} className="btn btn-primary btn-sm">{u.donate}</a>
           <button className="iconbtn burger" aria-label="Menu" onClick={() => setMobile(!mobile)}><Icon name={mobile ? 'close' : 'menu'} /></button>
         </div>
       </header>
       <div className={`mobile-menu ${mobile ? 'open' : ''}`}>
-        <div style={{ display: 'flex', gap: 10 }}><Link to="/donate" className="btn btn-primary" style={{ flex: 1 }} onClick={closeAll}>{u.donate}</Link><Link to="/volunteer" className="btn btn-secondary" style={{ flex: 1 }} onClick={closeAll}>{u.join}</Link></div>
+        <div style={{ display: 'flex', gap: 10 }}><a href={hrefFor('/donate')} className="btn btn-primary" style={{ flex: 1 }}>{u.donate}</a><a href={hrefFor('/volunteer')} className="btn btn-secondary" style={{ flex: 1 }}>{u.join}</a></div>
         <div style={{ marginTop: 10 }}><button onClick={() => { setLang(lang === 'en' ? 'bn' : 'en') }}>{lang === 'en' ? 'বাংলা' : 'English'}</button></div>
-        {[['/', u.home], ['/about', u.about], ['/transparency', u.transparency], ['/programmes', u.programmes], ['/campaigns', u.campaigns], ['/stories', u.stories], ['/volunteer', u.volunteer], ['/blood', u.blood], ['/celebrate', u.celebrate], ['/contact', u.contact]].map(([to, l]) => <Link key={to} to={to} onClick={closeAll}>{l}</Link>)}
+        {[['/', u.home], ['/about', u.about], ['/transparency', u.transparency], ['/programmes', u.programmes], ['/campaigns', u.campaigns], ['/stories', u.stories], ['/volunteer', u.volunteer], ['/blood', u.blood], ['/celebrate', u.celebrate], ['/contact', u.contact]].map(([to, l]) => <a key={to} href={hrefFor(to)}>{l}</a>)}
         <div style={{ marginTop: 16, paddingTop: 14, borderTop: '1px solid #ebebeb', fontSize: 13, color: '#535558', textAlign: 'center' }}><div className="social-row" style={{ justifyContent: 'center' }}>{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div><p style={{ marginTop: 12 }}>{REGISTRATION}</p></div>
       </div>
       </div>
@@ -95,11 +99,11 @@ export function Footer() {
   const { lang } = useSite(); const u = t(null, lang)
   return <footer className="site"><div className="wrap footgrid">
     <div><div className="logo"><img src={LOGO_URL} alt="BBDC — Beyond Boundaries for Development and Change" className="logo-img foot-logo" onError={e => { e.currentTarget.style.display = 'none' }} /></div><p className="muted" style={{ marginTop: 16 }}>{lang === 'bn' ? 'বরিশালের একটি স্বেচ্ছাসেবী সংগঠন — ২০১২ সাল থেকে।' : 'A volunteer organisation in Barishal, Bangladesh — since 2012.'}</p><p className="muted" style={{ fontSize: 13 }}>{u.footerNote}</p><div className="social-row">{SOCIALS.map(s => <a key={s.id} href={s.url} target="_blank" rel="noreferrer" aria-label={s.label} title={s.label}><Icon name={s.id} size={18} /></a>)}</div></div>
-    <div><b>{lang === 'bn' ? 'ঘুরে দেখুন' : 'Explore'}</b><Link to="/about">{u.about}</Link><Link to="/programmes">{u.programmes}</Link><Link to="/campaigns">{u.campaigns}</Link><Link to="/stories">{u.stories}</Link></div>
-    <div><b>{lang === 'bn' ? 'দ্রুত লিংক' : 'Quick Links'}</b><Link to="/volunteer">{u.volunteer}</Link><Link to="/celebrate">{u.celebrate}</Link><Link to="/donate">{u.donate}</Link><Link to="/transparency">{u.transparency}</Link></div>
-    <div><b>{u.about}</b><Link to="/about">{lang === 'bn' ? 'আমরা কারা' : 'Who we are'}</Link><Link to="/about">{lang === 'bn' ? 'আমরা কীভাবে কাজ করি' : 'How BBDC works'}</Link><Link to="/transparency">{u.transparency}</Link><Link to="/contact">{u.contact}</Link></div>
-    <div><b>{u.ourWork}</b><Link to="/programmes">{u.programmes}</Link><Link to="/campaigns">{u.campaigns}</Link><Link to="/blood">{u.blood}</Link><Link to="/stories">{u.stories}</Link></div>
-    <div><b>{u.contact}</b><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a><Link to="/contact">Barishal, Bangladesh</Link><Link to="/donate">{u.donate}</Link></div>
+    <div><b>{lang === 'bn' ? 'ঘুরে দেখুন' : 'Explore'}</b><a href={hrefFor('/about')}>{u.about}</a><a href={hrefFor('/programmes')}>{u.programmes}</a><a href={hrefFor('/campaigns')}>{u.campaigns}</a><a href={hrefFor('/stories')}>{u.stories}</a></div>
+    <div><b>{lang === 'bn' ? 'দ্রুত লিংক' : 'Quick Links'}</b><a href={hrefFor('/volunteer')}>{u.volunteer}</a><a href={hrefFor('/celebrate')}>{u.celebrate}</a><a href={hrefFor('/donate')}>{u.donate}</a><a href={hrefFor('/transparency')}>{u.transparency}</a></div>
+    <div><b>{u.about}</b><a href={hrefFor('/about')}>{lang === 'bn' ? 'আমরা কারা' : 'Who we are'}</a><a href={hrefFor('/about')}>{lang === 'bn' ? 'আমরা কীভাবে কাজ করি' : 'How BBDC works'}</a><a href={hrefFor('/transparency')}>{u.transparency}</a><a href={hrefFor('/contact')}>{u.contact}</a></div>
+    <div><b>{u.ourWork}</b><a href={hrefFor('/programmes')}>{u.programmes}</a><a href={hrefFor('/campaigns')}>{u.campaigns}</a><a href={hrefFor('/blood')}>{u.blood}</a><a href={hrefFor('/stories')}>{u.stories}</a></div>
+    <div><b>{u.contact}</b><a href="https://facebook.com/BBDCaid" target="_blank" rel="noreferrer">facebook.com/BBDCaid</a><a href={hrefFor('/contact')}>Barishal, Bangladesh</a><a href={hrefFor('/donate')}>{u.donate}</a></div>
   </div><div className="foot-bottom"><div className="wrap"><span>© BBDC — Beyond Boundaries for Development and Change</span><span>{REGISTRATION}</span></div></div></footer>
 }
 export function Progress({ raised, goal }) {
@@ -128,7 +132,7 @@ export function DonateWidget({ initialFund }) {
     <label>{lang === 'bn' ? 'পরিমাণ বেছে নিন' : 'Choose Amount'}</label>
     <div className="chips">{[50, 100, 250, 500].map(a => <button key={a} className={`chip ${!custom && amount === a ? 'on' : ''}`} onClick={() => { setAmount(a); setCustom('') }}>৳{a.toLocaleString()}</button>)}<button className={`chip ${custom ? 'on' : ''}`} onClick={() => setCustom('1000')}>{lang === 'bn' ? 'নিজের পরিমাণ' : 'Custom'}</button></div>
     <label>{lang === 'bn' ? 'পরিমাণ (৳)' : 'Amount'}</label>
-    <div style={{ display: 'flex', alignItems: 'center', gap: 0 }}><span style={{ height: 48, display: 'inline-flex', alignItems: 'center', padding: '0 14px', border: '1px solid #ebebeb', borderRight: 0, borderRadius: '12px 0 0 12px', background: '#fafafa' }}>৳</span><input className="field" style={{ borderRadius: '0 12px 12px 0' }} type="number" min="1" placeholder={lang === 'bn' ? 'নিজের পরিমাণ লিখুন' : 'Custom amount'} value={custom || amount} onChange={e => setCustom(e.target.value)} /></div>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 0 }}><span style={{ height: 56, display: 'inline-flex', alignItems: 'center', padding: '0 14px', border: '1px solid #d1d5db', borderRight: 0, borderRadius: '8px 0 0 8px', background: '#fafafa' }}>৳</span><input className="field" style={{ borderRadius: '0 8px 8px 0' }} type="number" min="1" placeholder={lang === 'bn' ? 'নিজের পরিমাণ লিখুন' : 'Custom amount'} value={custom || amount} onChange={e => setCustom(e.target.value)} /></div>
     <label>{lang === 'bn' ? 'আপনার নাম' : 'Full Name'} *</label>
     <input className="field" placeholder={lang === 'bn' ? 'আপনার নাম' : 'Full name'} />
     <label>Email *</label>
@@ -157,7 +161,7 @@ export function PartnersMarquee() {
   const { lang } = useSite()
   const en = lang !== 'bn'
   const tiles = [...PARTNERS, ...PARTNERS]
-  return <div><div className="marquee" aria-label={en ? 'Partners BBDC has worked with' : 'বিবিডিসি যাদের সঙ্গে কাজ করেছে'}><div className="marquee-track">{tiles.map((p, i) => <div key={i} className="partner-tile" title={p.name} aria-hidden={i >= PARTNERS.length}><img src={p.logo} alt={`${p.name} logo`} className="partner-logo" loading="lazy" /></div>)}</div></div><p className="muted" style={{ fontSize: 13, marginTop: 12 }}>{en ? 'UNICEF logo from UNICEF’s official brand artwork. The government partners share one official mark — the Government of Bangladesh seal, the same mark their own gov.bd sites display — so each tile pairs that seal with the partner’s name.' : 'ইউনিসেফ লোগো ইউনিসেফের অফিসিয়াল ব্র্যান্ড আর্টওয়ার্ক থেকে। সরকারি অংশীদারদের সবার একই অফিসিয়াল চিহ্ন — গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের সিল, যা তাদের নিজস্ব gov.bd সাইটেও দেখানো হয় — তাই প্রতিটি টাইলে সেই সিলের সঙ্গে অংশীদারের নাম দেওয়া হয়েছে।'}</p></div>
+  return <div><div className="marquee" aria-label={en ? 'Partners BBDC has worked with' : 'বিবিডিসি যাদের সঙ্গে কাজ করেছে'}><div className="marquee-track">{tiles.map((p, i) => <div key={i} className="partner-tile" title={p.name} aria-hidden={i >= PARTNERS.length}><img src={p.logo} alt={`${p.name} logo`} className="partner-logo" loading="lazy" /></div>)}</div></div><p className="muted" style={{ fontSize: 13, marginTop: 12 }}>{en ? 'UNICEF logo from UNICEF’s official brand artwork. The government partners share one official mark — the Government of Bangladesh seal, the same mark their own gov.bd sites display. Hover a tile to see that partner’s name.' : 'ইউনিসেফ লোগো ইউনিসেফের অফিসিয়াল ব্র্যান্ড আর্টওয়ার্ক থেকে। সরকারি অংশীদারদের সবার একই অফিসিয়াল চিহ্ন — গণপ্রজাতন্ত্রী বাংলাদেশ সরকারের সিল, যা তাদের নিজস্ব gov.bd সাইটেও দেখানো হয়। কোনো টাইলের উপর মাউস রাখলে সেই অংশীদারের নাম দেখা যাবে।'}</p></div>
 }
 export function Newsletter() {
   const { lang } = useSite(); const u = t(null, lang); const [ok, setOk] = useState(false)
