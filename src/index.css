@@ -1,19 +1,17 @@
-/* BBDC design system cloned from SNDC (sndcbd.org) pixel by pixel.
-   Tokens read from SNDC's own built CSS. BBDC content, logo and photos stay BBDC's.
-   SNDC is a light-only site, so this file is light-only: no dark theme, no dot pattern,
-   no serif display face. Font is Geist, the SNDC face. */
+/* BBDC design system, new creative direction (from Alif's mockup, 8 Nov 2026).
+   Warm cream + pale mint sections, dark teal, bright red, golden yellow.
+   Pill buttons, rounded cards, yellow highlighter, wavy dark Donate band.
+   Font is Geist (800 for display headings); Bengali mode is Hind Siliguri. */
 :root{
-  --primary:#0077ff; --primary-600:#0065d9; --primary-50:#ebf5ff;
-  --ink:#03030b; --muted:#535558; --muted-2:#8a8d91;
-  --line:#ebebeb; --surface-2:#fafafa; --surface:#ffffff; --bg:#ffffff;
-  --accent:#0077ff; --accent2:#0065d9;
-  --navy:#000000; --navy2:#03030b; --heading:#03030b;
-  --rose:#e11d48; --gold:#ffd166; --green:#0f8a55;
-  --shadow-card:0 0 3px rgba(0,0,0,.10);
-  --shadow-lift:0 18px 40px -18px rgba(3,3,11,.22);
-  --shadow:0 0 3px rgba(0,0,0,.10);
-  --shadow-lg:0 18px 40px -18px rgba(3,3,11,.22);
-  --radius:12px; --radius-2xl:16px; --radius-xl:12px; --radius-lg:8px;
+  --red:#e03131; --red-700:#c92a2a; --red-50:#fdecec;
+  --yellow:#f5b301; --yellow-soft:#fff6db; --yellow-line:#ebd28a;
+  --teal:#0e3b3a; --teal-2:#14524e; --teal-mid:#14746f; --teal-soft:#e7f2ec;
+  --cream:#fbf7ef; --ink:#102e2b; --muted:#5a6663; --muted-2:#8a938f;
+  --line:#e9e5db; --line-strong:#d8d3c6;
+  --surface:#ffffff; --bg:#ffffff;
+  --shadow-card:0 1px 3px rgba(16,46,43,.08);
+  --shadow-lift:0 18px 40px -18px rgba(16,46,43,.25);
+  --radius:20px; --radius-2xl:24px; --radius-xl:16px; --radius-lg:12px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:auto;overflow-x:clip}
@@ -25,57 +23,56 @@ html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3,html[lang="bn"] h4,html
 a{color:inherit;text-decoration:none}
 button{font:inherit}
 img{display:block;max-width:100%}
-::selection{background:var(--primary);color:#fff}
+::selection{background:var(--yellow);color:var(--ink)}
 
-/* Container: SNDC .container-x, max 1440, padding 16 / 24 / 40 / 72 */
+/* Container: max 1440, padding 16 / 24 / 40 / 72 */
 .wrap,.container-x{width:100%;max-width:1440px;margin-inline:auto;padding-inline:16px}
 @media(min-width:640px){.wrap,.container-x{padding-inline:24px}}
 @media(min-width:1024px){.wrap,.container-x{padding-inline:40px}}
 @media(min-width:1280px){.wrap,.container-x{padding-inline:72px}}
 
-/* Type scale: SNDC .t-display / .t-h2 / .t-h3 / .t-h4 */
-h1{font-size:44px;line-height:48px;font-weight:700;letter-spacing:-2.5px;margin:12px 0 16px}
-h2{font-size:32px;line-height:38px;font-weight:600;letter-spacing:-1.5px;margin:0 0 14px}
-h3{font-size:28px;line-height:34px;font-weight:600;letter-spacing:-1.2px;margin:0 0 8px}
-h4{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-1px;margin:0 0 8px}
-@media(min-width:640px){h1{font-size:56px;line-height:62px;letter-spacing:-4px}h2{font-size:40px;line-height:48px}h3{font-size:34px;line-height:42px}}
-@media(min-width:1024px){h1{font-size:72px;line-height:80px;letter-spacing:-6px}h2{font-size:48px;line-height:56px;letter-spacing:-3px}h3{font-size:40px;line-height:48px;letter-spacing:-2.5px}h4{font-size:32px;line-height:40px;letter-spacing:-1.7px}}
-.lead{font-size:20px;line-height:28px;letter-spacing:-.64px;color:var(--muted);max-width:640px}
+/* Type scale */
+h1{font-size:44px;line-height:1.06;font-weight:800;letter-spacing:-.03em;margin:12px 0 16px}
+h2{font-size:32px;line-height:1.12;font-weight:700;letter-spacing:-.02em;margin:0 0 14px}
+h3{font-size:24px;line-height:1.25;font-weight:700;letter-spacing:-.01em;margin:0 0 8px}
+h4{font-size:20px;line-height:1.3;font-weight:700;letter-spacing:-.01em;margin:0 0 8px}
+@media(min-width:640px){h1{font-size:56px}h2{font-size:40px;line-height:1.15}h3{font-size:28px}}
+@media(min-width:1024px){h1{font-size:64px}h2{font-size:48px;line-height:1.12}h3{font-size:28px}}
+.lead{font-size:18px;line-height:1.6;color:var(--muted);max-width:640px}
 .muted{color:var(--muted)}
 .caption{font-size:13px;color:var(--muted);margin-top:8px}
 
-/* Eyebrow: SNDC .eyebrow, 14px medium blue with 24x2 rule */
-.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:14px;line-height:20px;font-weight:500;letter-spacing:0;color:var(--primary)}
-.eyebrow::before{content:'';height:2px;width:24px;background:var(--primary);border-radius:999px;flex:none}
-.eyebrow-dark{color:#fff}.eyebrow-dark::before{background:#fff}
+/* Yellow highlighter swash for hero words */
+.hl{background:var(--yellow);padding:0 .08em;border-radius:8px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
 
-/* Header: SNDC .site-header__bar (absolute, top) + .nav-card (floating white card).
-   On scroll the bar pins to the top (fixed) with a solid border, like SNDC. */
-.site-header-bar{position:absolute;top:0;left:0;right:0;z-index:50;padding-top:12px}
-.site-header-bar.stuck{position:fixed;top:0}
-.site-header-bar.stuck .nav-card{border-color:var(--line)}
-.announce-bar{background:var(--primary-50);min-height:40px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;color:var(--ink);padding:6px 44px 6px 16px;position:relative;text-align:center}
-.announce-bar a{color:var(--primary);font-weight:600;white-space:nowrap}
+/* Eyebrow: small caps with a short coloured dash */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:13px;line-height:20px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)}
+.eyebrow::before{content:'';height:2px;width:22px;background:var(--red);border-radius:999px;flex:none}
+.eyebrow-dark{color:#fff}.eyebrow-dark::before{background:var(--yellow)}
+
+/* Header: flat white bar with a hairline, sticky on scroll. The yellow
+   announcement bar sits above it and scrolls away. */
+.site-header-bar{position:absolute;top:0;left:0;right:0;z-index:50;background:#fff;border-bottom:1px solid var(--line)}
+.site-header-bar.stuck{position:fixed;top:0;box-shadow:0 2px 14px rgba(16,46,43,.07)}
+.announce-bar{background:var(--yellow);min-height:40px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;color:var(--ink);padding:6px 44px 6px 16px;position:relative;text-align:center}
+.announce-bar a{color:var(--ink);font-weight:700;white-space:nowrap}
 .announce-bar a:hover{text-decoration:underline}
-.announce-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:18px;line-height:1;cursor:pointer;color:var(--muted);padding:4px 8px}
-@media(min-width:640px){.site-header-bar{padding-top:24px}}
-.header-spacer{background:var(--surface-2);height:96px}
-@media(min-width:640px){.header-spacer{height:134px}}
-.nav-card{display:flex;align-items:center;justify-content:space-between;gap:16px;border-radius:16px;background:rgba(255,255,255,.95);backdrop-filter:blur(14.5px);border:1px solid rgba(255,255,255,.6);box-shadow:var(--shadow-card);padding:12px 16px;transition:all .3s}
-@media(min-width:640px){.nav-card{padding:19px 24px}}
-@media(min-width:1024px){.nav-card{padding-inline:32px}}
-.site-header--solid .nav-card{border-color:var(--line)}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.5px;color:var(--ink);font-size:22px;flex:none}
+.announce-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);border:0;background:none;font-size:18px;line-height:1;cursor:pointer;color:var(--ink);padding:4px 8px}
+.header-spacer{background:#fff;height:96px}
+@media(min-width:640px){.header-spacer{height:120px}}
+.nav-card{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;background:transparent;border:0;box-shadow:none;border-radius:0}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.5px;color:var(--ink);font-size:22px;flex:none}
 .logo-img{height:40px;width:auto;max-width:220px;object-fit:contain}
 @media(min-width:640px){.logo-img{height:44px}}
 .logo-text{display:none}
-.foot-logo{height:52px;max-width:260px;background:#fff;border-radius:8px;padding:4px 8px}
-/* Nav pill: SNDC .nav-pill, 48px high, #fafafa, 1px line, radius 12, gap 24 */
+.foot-logo{height:48px;max-width:260px;background:#fff;border-radius:10px;padding:6px 10px}
+/* Nav: plain text links, no pill background. The dropdown label is a real
+   link to the section page; only the small chevron opens the dropdown. */
 nav.main{display:flex;align-items:center}
-.nav-pill{display:flex;align-items:center;gap:32px;height:48px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);padding-inline:28px}
-nav.main a,nav.main button.navlink{font-size:16px;line-height:22px;letter-spacing:-.5px;font-weight:400;padding:0;border:0;background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
-nav.main a:hover,nav.main button.navlink:hover{color:var(--primary)}
-nav.main a.active{color:var(--primary);font-weight:500}
+.nav-pill{display:flex;align-items:center;gap:28px;height:auto;border:0;background:transparent;padding:0;border-radius:0}
+nav.main a,nav.main button.navlink{font-size:15px;line-height:22px;letter-spacing:0;font-weight:500;padding:0;border:0;background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+nav.main a:hover,nav.main button.navlink:hover{color:var(--red)}
+nav.main a.active{color:var(--red);font-weight:700}
 .dropdown{position:relative;display:flex;align-items:center;height:48px}
 /* Invisible bridge over the 10px gap between the bar and the panel, so the
    menu does not close while the mouse travels down to a link. It is as wide
@@ -83,221 +80,276 @@ nav.main a.active{color:var(--primary);font-weight:500}
    link can leave the narrow label behind. */
 .dropdown.open::after{content:'';position:absolute;top:100%;left:0;width:280px;height:10px}
 .nav-dd-toggle{border:0;background:none;padding:4px;margin-left:-2px;cursor:pointer;color:inherit;display:inline-flex;align-items:center}
-.nav-dd-toggle:hover{color:var(--primary)}
-.dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift);padding:10px;display:none;flex-direction:column;gap:10px;z-index:70}
+.nav-dd-toggle:hover{color:var(--red)}
+.dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lift);padding:10px;display:none;flex-direction:column;gap:10px;z-index:70}
 .dropdown.open .dropdown-panel{display:flex}
 nav.main .dropdown:last-child .dropdown-panel{left:auto;right:0}
-.dropdown-panel a{display:block;padding:13px 16px;border-radius:8px;font-size:14px;line-height:20px;white-space:nowrap;color:var(--ink)}
-.dropdown-panel a:hover{background:var(--primary-50);color:var(--primary)}
+.dropdown-panel a{display:block;padding:13px 16px;border-radius:10px;font-size:14px;line-height:20px;white-space:nowrap;color:var(--ink)}
+.dropdown-panel a:hover{background:var(--yellow-soft);color:var(--ink)}
 header.site{z-index:60}
 .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .actions{display:flex;align-items:center;gap:8px;flex:none}
-.iconbtn{width:40px;height:40px;border-radius:8px;border:1px solid var(--line);background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
-.iconbtn:hover{border-color:var(--primary);color:var(--primary)}
-.langbtn{height:40px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)}
-.langbtn:hover{border-color:var(--primary);color:var(--primary)}
+.iconbtn{width:40px;height:40px;border-radius:999px;border:1px solid var(--line);background:#fff;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink)}
+.iconbtn:hover{border-color:var(--red);color:var(--red)}
+.langbtn{height:40px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13px;font-weight:600;cursor:pointer;color:var(--ink)}
+.langbtn:hover{border-color:var(--red);color:var(--red)}
+.langbtn b{font-weight:800}
 .burger{display:none}
 
-/* Buttons: SNDC .btn, height 48, radius 12, 16px medium, tracking -0.7px */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding-inline:32px;border-radius:12px;font-weight:500;font-size:16px;line-height:22px;letter-spacing:-.7px;border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:all .2s}
+/* Buttons: pill-shaped, 48px high */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:48px;padding-inline:28px;border-radius:999px;font-weight:600;font-size:16px;line-height:22px;letter-spacing:-.02em;border:1.5px solid transparent;cursor:pointer;white-space:nowrap;transition:all .2s}
 .btn-sm{height:40px;padding-inline:20px;font-size:14px;line-height:20px}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--primary-600);box-shadow:var(--shadow-lift)}
-.btn-secondary{border:1.5px solid var(--primary);background:#fff;color:var(--primary)}
-.btn-secondary:hover{background:var(--primary-50)}
-.btn-outline{border:1px solid var(--line);background:#fff;color:var(--ink)}
-.btn-outline:hover{border-color:var(--primary);color:var(--primary)}
-.btn-soft{background:var(--primary-50);color:var(--primary);border-radius:8px}
-.btn-soft:hover{background:var(--primary);color:#fff}
+.btn-primary{background:var(--red);color:#fff}
+.btn-primary:hover{background:var(--red-700);box-shadow:var(--shadow-lift)}
+.btn-secondary{border:1.5px solid var(--ink);background:#fff;color:var(--ink)}
+.btn-secondary:hover{background:#f4efe6}
+.btn-outline{border:1.5px solid var(--ink);background:#fff;color:var(--ink)}
+.btn-outline:hover{background:#f4efe6}
+.btn-soft{background:var(--red-50);color:var(--red)}
+.btn-soft:hover{background:var(--red);color:#fff}
 .btn-white{background:#fff;color:var(--ink)}
-.btn-white:hover{background:var(--primary-50)}
-.btn-outline-light{border:1px solid var(--primary-50);background:transparent;color:#fff}
+.btn-white:hover{background:var(--yellow-soft)}
+.btn-dark{background:var(--teal);color:#fff}
+.btn-dark:hover{background:var(--teal-2)}
+.btn-yellow{background:var(--yellow);color:var(--ink)}
+.btn-yellow:hover{background:#e5a800}
+.btn-outline-light{border:1.5px solid rgba(255,255,255,.6);background:transparent;color:#fff}
 .btn-outline-light:hover{background:rgba(255,255,255,.12)}
-.btn-navy{background:#000;color:#fff}
 
-/* Sections: SNDC .sndc-section, py 56 / 72, white alternating with #fafafa */
+/* Full-bleed bands (the page lives inside main.wrap, so bands break out) */
+.band{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:72px 0}
+.band-cream{background:var(--cream)}
+.band-mint{background:var(--teal-soft)}
+.band-white{background:#fff}
 .section{padding:56px 0}
 @media(min-width:768px){.section{padding:72px 0}}
-.sndc-band{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);padding:56px 0}
-@media(min-width:768px){.sndc-band{padding:72px 0}}
-.band-white{background:#fff}
-.band-grey{background:var(--surface-2)}
-.band-blue{background:var(--primary-50)}
-.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:28px}
 .section-head h2{margin-bottom:0}
-.view-all{font-size:16px;font-weight:500;color:var(--primary);white-space:nowrap}
+.view-all{font-size:16px;font-weight:600;color:var(--red);white-space:nowrap}
 .view-all:hover{text-decoration:underline}
 
-/* Hero: SNDC hero banner, min-height 640 / 760 / 876, photo cover, black bottom gradient */
-.hero-video{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);min-height:640px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;overflow:hidden;background:#03030b}
-@media(min-width:768px){.hero-video{min-height:760px}}
-@media(min-width:1024px){.hero-video{min-height:876px}}
-.hero-video-media{position:absolute;inset:0}
-.hero-video-poster{position:absolute;inset:0;background:center/cover no-repeat}
-.hero-video-media iframe{position:absolute;top:50%;left:50%;width:177.78vh;height:100vh;min-width:100%;min-height:56.25vw;transform:translate(-50%,-50%);border:0;pointer-events:none}
-.hero-video-inner .caption{color:rgba(255,255,255,.85)}
-.hero-video-scrim{position:absolute;inset:0;background:linear-gradient(191.33deg,rgba(0,0,0,0) 45.46%,#000 80.47%)}
-.hero-video-topshade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.25),transparent 30%)}
-.hero-video-content{position:relative;z-index:2;width:100%;max-width:1440px;margin:0 auto;padding:144px 16px 40px}
-@media(min-width:640px){.hero-video-content{padding-inline:24px;padding-bottom:56px}}
-@media(min-width:1024px){.hero-video-content{padding-inline:40px;padding-bottom:72px}}
-@media(min-width:1280px){.hero-video-content{padding-inline:72px}}
-.hero-video-inner{display:flex;flex-direction:column;gap:32px}
-@media(min-width:1024px){.hero-video-inner{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:40px}}
-.hero-video-left{max-width:760px}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;border-radius:999px;background:#fff;color:var(--primary);padding:7px 16px;font-size:14px;font-weight:500;box-shadow:var(--shadow-card)}
-.hero-video-content h1{color:#fff;margin:16px 0 0}
-.hero-video-right{width:100%;display:flex;flex-direction:column;gap:24px}
-@media(min-width:1024px){.hero-video-right{max-width:480px;gap:32px}}
-.hero-video-right .lead{color:rgba(255,255,255,.95);margin:0}
-.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
-.hero-video-credit{font-size:13px;color:rgba(255,255,255,.8);margin-top:24px}
-@media(prefers-reduced-motion:reduce){.hero-video-media iframe{display:none}}
+/* Hero: cream band, art card + overlapping Need blood card */
+.hero-new{padding:128px 0 72px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:14px;font-weight:600;color:var(--ink)}
+.hero-pill .dot{width:8px;height:8px;border-radius:50%;background:var(--red);flex:none}
+.hero-new h1{margin:20px 0 18px}
+.hero-lead{font-size:18px;line-height:1.6;color:var(--muted);max-width:520px;margin:0}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero-art{position:relative}
+.hero-art-card{background:var(--teal);border-radius:24px;overflow:hidden}
+.hero-art-card svg{display:block;width:100%;height:auto}
+.blood-card{position:relative;z-index:2;background:#fff;border-radius:16px;box-shadow:0 18px 40px -18px rgba(16,46,43,.28);padding:20px 22px;margin:-72px 24px 0}
+.blood-card-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.blood-card h3{font-size:20px;margin:0}
+.blood-card .sub{font-size:13px;color:var(--muted);white-space:nowrap}
+.group-pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.group-pills button{min-width:52px;height:44px;padding:0 10px;border-radius:10px;border:1px solid var(--line-strong);background:#fff;font-weight:600;font-size:15px;cursor:pointer;color:var(--ink)}
+.group-pills button:hover{border-color:var(--red);color:var(--red)}
+.group-pills button.on{background:var(--red);border-color:var(--red);color:#fff}
 
-/* Ticker: SNDC impact ticker, a looping marquee, white strip, icon + number + label inline */
-.ticker{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.ticker-track{display:flex;gap:48px;width:max-content;animation:marquee 32s linear infinite}
-.ticker:hover .ticker-track{animation-play-state:paused}
-.ticker-item{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;font-size:16px;color:var(--muted)}
-.ticker-item svg{color:var(--primary);flex:none}
-.ticker-item b{font-size:20px;line-height:1;font-weight:700;letter-spacing:-.5px;color:var(--ink)}
+/* Stats strip: white band, red left rule on each stat */
+.stat-strip{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 0}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.stat-item{border-left:3px solid var(--red);padding-left:16px}
+.stat-item b{font-size:32px;font-weight:800;letter-spacing:-.02em;display:block;line-height:1.1}
+.stat-item span{font-size:14px;color:var(--muted)}
 
-/* Cards: SNDC radius 12, 1px line, shadow-card on hover */
-.card{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
+/* Timeline (home About, right column) */
+.timeline{position:relative}
+.tl-item{position:relative;padding:0 0 28px 28px;border-left:2px solid #ede8dc;margin-left:8px}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{position:absolute;left:-9px;top:4px;width:16px;height:16px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px #ede8dc}
+.tl-item b{font-size:18px;display:block}
+.tl-item p{margin:4px 0 0;color:var(--muted);font-size:15px}
+.plain-facts{background:#f6f1e7;border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin-top:28px}
+.plain-facts .pf-label{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.plain-facts p{margin:8px 0 0;font-size:15px}
+
+/* Cards: radius 20, warm hairline, soft lift on hover */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
 .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
 .card-body{padding:24px}
-.card-body h2{font-size:28px;line-height:34px}
-@media(min-width:768px){.card-body h2{font-size:32px;line-height:40px}}
-.card-body h3{font-size:20px;line-height:28px;letter-spacing:-.5px}
-@media(min-width:768px){.card-body h3{font-size:24px;line-height:32px;letter-spacing:-1px}}
-.card-img{height:220px;background:var(--surface-2);overflow:hidden}
+.card-body h2{font-size:28px;line-height:1.2}
+@media(min-width:768px){.card-body h2{font-size:32px}}
+.card-body h3{font-size:20px;line-height:1.3}
+@media(min-width:768px){.card-body h3{font-size:22px}}
+.card-img{height:220px;background:var(--teal-soft);overflow:hidden}
 @media(min-width:1024px){.card-img{height:246px}}
 .card-img.small{height:170px}
 .card-img img,.hero-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
 .card:hover .card-img img{transform:scale(1.03)}
-.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--primary);margin-bottom:8px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 
-/* Wide project rows: SNDC project cards, image left, content right */
-.prog-row{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:24px;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-@media(min-width:1024px){.prog-row{grid-template-columns:1fr 1fr}}
-.prog-row-img{height:220px;overflow:hidden}
-@media(min-width:640px){.prog-row-img{height:280px}}
-@media(min-width:1024px){.prog-row-img{height:316px}}
-.prog-row-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
-.prog-row:hover .prog-row-img img{transform:scale(1.03)}
-.prog-row-body{padding:24px;display:flex;flex-direction:column;justify-content:center;gap:8px}
-@media(min-width:1024px){.prog-row-body{padding:32px}}
-.prog-row-body h3{font-size:24px;line-height:32px;margin-bottom:4px}
-@media(min-width:768px){.prog-row-body h3{font-size:28px;line-height:34px}}
-.prog-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
-.prog-tag{display:inline-flex;align-items:center;height:30px;padding:6px 12px;border-radius:8px;background:#fff;border:1px solid #e5e7eb;color:#374151;font-size:13px;font-weight:500}
-.support-link{display:inline-flex;align-items:center;gap:8px;font-weight:500;color:var(--primary);margin-top:8px}
+/* Programme cards: coloured icon panel left, white body right */
+.prog-card{display:grid;grid-template-columns:180px 1fr;background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
+.prog-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.prog-icon{display:flex;align-items:center;justify-content:center;min-height:180px}
+.prog-icon svg{width:64px;height:64px}
+.prog-body{padding:24px 26px;display:flex;flex-direction:column;gap:6px}
+.prog-tagline{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.prog-body h3{font-size:22px;line-height:1.25;margin:0}
+.prog-body p{margin:0;color:var(--muted);font-size:15px}
+.support-link{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--red);margin-top:auto;padding-top:10px}
 .support-link:hover{text-decoration:underline}
 
-/* Campaign cards: SNDC raised/goal box, thin track, full-width soft button */
-.raised-box{border:1px solid var(--line);background:var(--surface-2);border-radius:12px;padding:16px;display:flex;justify-content:space-between;gap:16px;margin:16px 0 12px}
+/* Campaign cards: coloured top panel with icon, body with progress */
+.camp-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease}
+.camp-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.camp-top{position:relative;height:128px;display:flex;align-items:center;padding:0 24px;overflow:hidden}
+.camp-top svg{width:56px;height:56px;position:relative;z-index:1}
+.camp-top::after{content:'';position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.16)}
+.camp-body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
+.camp-body h3{font-size:22px;margin:0}
+.camp-body p{margin:0;color:var(--muted);font-size:15px}
+.camp-progress{margin-top:8px}
+.camp-progress-top{display:flex;justify-content:space-between;gap:12px;font-size:14px;color:var(--muted);margin-bottom:8px}
+.camp-progress-top b{color:var(--ink)}
+.progress{height:8px;background:#f1ead9;border-radius:999px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--red);border-radius:999px}
+.camp-actions{display:flex;align-items:center;gap:16px;margin-top:16px}
+.camp-actions .btn{flex:1}
+.progress-note{font-size:14px;color:var(--muted);margin:10px 0 16px;text-align:right}
+.raised-box{border:1px solid var(--line);background:#fbf7ef;border-radius:12px;padding:16px;display:flex;justify-content:space-between;gap:16px;margin:16px 0 12px}
 .raised-box span{font-size:14px;color:var(--muted)}
 .raised-box b{display:block;font-size:18px;color:var(--ink);margin-top:2px}
-.progress{height:6px;background:#e5e7eb;border-radius:999px;overflow:hidden}
-.progress i{display:block;height:100%;background:var(--primary)}
-.progress-note{font-size:14px;color:var(--muted);margin:10px 0 16px;text-align:right}
 
-/* Equal-height cards: buttons sit at the bottom of the tallest card, so no
-   card is left with a large empty white area below its button. */
+/* Equal-height cards: buttons sit at the bottom of the tallest card */
 .eq-cards .card{display:flex;flex-direction:column}
 .eq-cards .card-body{flex:1;display:flex;flex-direction:column}
 .eq-cards .card-body .btn{margin-top:auto}
 .eq-cards .card-body .btn + .btn{margin-top:12px}
-.step-num{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;background:var(--primary-50);color:var(--primary);font-weight:700;font-size:18px;margin-bottom:12px}
+.step-num{display:inline-flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:50%;background:var(--yellow);color:var(--ink);font-weight:800;font-size:19px;margin-bottom:14px}
+.step-num.teal{background:var(--teal-mid);color:#fff}
 .stat{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff}
 .stat b{font-size:34px;color:var(--ink);display:block;line-height:1.1;letter-spacing:-1.5px}
-.way-icon{width:48px;height:48px;min-width:48px;border-radius:12px;background:var(--primary-50);color:var(--primary);display:inline-flex;align-items:center;justify-content:center}
-.split{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:start}
+.way-icon{width:44px;height:44px;min-width:44px;border-radius:12px;background:var(--teal-soft);color:var(--teal-mid);display:inline-flex;align-items:center;justify-content:center}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start}
 .sidebar{position:sticky;top:120px}
 /* Sticky text column next to a tall panel (home Donate section): it stays in
    view while the form scrolls, and clears the fixed header. */
 .sticky-col{position:sticky;top:120px;align-self:start}
-.band{background:#000;color:#fff;border-radius:12px;padding:36px}
-.band h2{color:#fff}
-.band .lead{color:rgba(255,255,255,.85)}
-.section-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:36px}
-.section-dark{background:#000;color:#fff;border-radius:12px;padding:36px}
+.band-dark{background:var(--teal);color:#fff;border-radius:12px;padding:36px}
+.band-dark h2{color:#fff}
+.band-dark .lead{color:rgba(255,255,255,.85)}
+.section-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:36px}
+.section-dark{background:var(--teal);color:#fff;border-radius:var(--radius);padding:36px}
 .section-dark h2{color:#fff}
 .section-dark .lead,.section-dark .muted{color:rgba(255,255,255,.8)}
 
-/* Donate form panel: SNDC white form panel on pale blue */
-.donate-panel{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-card);padding:28px}
-.field{width:100%;height:56px;padding:0 14px;border:1px solid #d1d5db;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:16px}
+/* More ways: three big coloured cards + small tiles */
+.ways-card{border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;gap:10px;min-height:300px}
+.ways-card .eyebrow{color:rgba(255,255,255,.85)}
+.ways-card .eyebrow::before{background:#fff}
+.ways-card h3{color:#fff;font-size:26px;line-height:1.2;margin:0}
+.ways-card p{color:rgba(255,255,255,.92);margin:0;font-size:15px}
+.ways-card .btn{margin-top:auto;align-self:flex-start}
+.ways-red{background:var(--red)}
+.ways-teal{background:var(--teal)}
+.ways-yellow{background:var(--yellow)}
+.ways-yellow .eyebrow{color:rgba(16,46,43,.7)}
+.ways-yellow .eyebrow::before{background:var(--ink)}
+.ways-yellow h3{color:var(--ink)}
+.ways-yellow p{color:rgba(16,46,43,.82)}
+.way-chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 6px}
+.way-chip{border:1.5px solid rgba(16,46,43,.55);border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;color:var(--ink);background:transparent}
+.way-tile{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 18px;font-weight:600;color:var(--ink);transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.way-tile:hover{transform:translateY(-3px);border-color:var(--red);box-shadow:var(--shadow-lift)}
+
+/* Story cards: text only, coloured pill + note */
+.story-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:10px;transition:transform .18s ease,box-shadow .18s ease}
+.story-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+.story-pills{display:flex;align-items:center;gap:10px}
+.pill{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.pill-teal{background:#d9eee3;color:#0f5c50}
+.pill-yellow{background:var(--yellow-soft);color:#7a5b00}
+.pill-red{background:var(--red-50);color:#b42318}
+.pill-note{font-size:13px;color:var(--muted);font-weight:600}
+.story-card h3{font-size:22px;line-height:1.3;margin:0}
+.story-card p{margin:0;color:var(--muted);font-size:15px}
+.story-card .view-all{margin-top:auto;padding-top:8px}
+
+/* Donate band: dark teal with wavy top and bottom edges */
+.donate-band-wrap{padding:0}
+.wave{display:block;width:100%;height:56px}
+.donate-band{background:var(--teal);color:#fff;padding:24px 0 64px}
+.donate-band h2{color:#fff}
+.donate-band .lead{color:rgba(255,255,255,.85)}
+.donate-band .eyebrow{color:var(--yellow)}
+.donate-band .eyebrow::before{background:var(--yellow)}
+.before-card{background:var(--teal-2);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:20px 22px;margin-top:28px}
+.before-card h3{color:#fff;font-size:17px;margin:0 0 12px}
+.before-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.before-card li{display:flex;gap:10px;font-size:15px;color:rgba(255,255,255,.92);align-items:flex-start}
+.before-card li svg{color:var(--yellow);flex:none;margin-top:3px}
+.donate-panel{background:#fff;border-radius:var(--radius);box-shadow:0 24px 48px -24px rgba(0,0,0,.35);padding:28px;color:var(--ink)}
+.donate-panel h3{font-size:24px}
+.zakat-card{background:var(--teal-2);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:24px 26px;color:#fff;margin-top:16px}
+.zakat-card h3{color:#fff;font-size:20px;margin:0 0 4px}
+.zakat-card label{color:rgba(255,255,255,.85)}
+.zakat-card .field{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);color:#fff}
+.zakat-card .field:focus{outline-color:var(--yellow);border-color:var(--yellow)}
+.zakat-est{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;font-size:15px}
+.zakat-est b{color:var(--yellow);font-size:26px}
+
+/* Donate form */
+.field{width:100%;height:52px;padding:0 14px;border:1px solid var(--line-strong);border-radius:12px;background:#fff;color:var(--ink);font:inherit;font-size:15px}
 textarea.field{height:auto;padding:12px 14px}
-.field:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
-label{display:block;font-weight:500;font-size:14px;margin:16px 0 6px}
+.field:focus{outline:2px solid var(--teal-mid);outline-offset:1px;border-color:var(--teal-mid)}
+label{display:block;font-weight:600;font-size:14px;margin:16px 0 8px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{min-height:52px;padding:9px 16px;border-radius:8px;border:1px solid #d1d5db;background:#fff;cursor:pointer;font-weight:500;font-size:14px;color:var(--ink)}
-.chip:hover{border-color:var(--primary);color:var(--primary)}
-.chip.on{background:var(--primary);color:#fff;border-color:var(--primary)}
-.faq{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:#fff}
+.chip{min-height:48px;padding:8px 16px;border-radius:10px;border:1px solid var(--line-strong);background:#fff;cursor:pointer;font-weight:600;font-size:14px;color:var(--ink)}
+.chip:hover{border-color:var(--red);color:var(--red)}
+.chip.on{background:var(--red);color:#fff;border-color:var(--red)}
+.faq{border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden;background:#fff}
 .faq button{width:100%;text-align:left;padding:15px 16px;background:none;border:0;font-weight:600;cursor:pointer;color:var(--ink);display:flex;justify-content:space-between;gap:12px;font-size:16px}
 .faq div{padding:0 16px 16px;color:var(--muted)}
-.notice{border:1px solid var(--line);background:var(--primary-50);color:var(--ink);border-radius:12px;padding:14px 16px}
-.ok{background:#eaf7ee;border:1px solid #bfe3c8;color:#14532d;border-radius:12px;padding:12px 14px}
-.newsletter-strip{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px 32px}
-.newsletter-strip h2{color:var(--ink)}
-.img-fallback{height:100%;min-height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#03030b,#0077ff);color:#fff;font-weight:700;padding:20px;text-align:center}
+.notice{border:1px solid var(--yellow-line);background:var(--yellow-soft);color:var(--ink);border-radius:12px;padding:14px 16px}
+.ok{background:#e7f2ec;border:1px solid #bfe0cb;color:#14532d;border-radius:12px;padding:12px 14px}
 
-/* Image band: SNDC video banner, full-bleed photo with dark gradient */
-.image-band{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);min-height:440px;display:flex;align-items:center;overflow:hidden;background-color:#03030b;color:#fff}
-.image-band-scrim{position:absolute;inset:0;background:linear-gradient(191.33deg,rgba(0,0,0,0) 45.46%,#000 80.47%)}
-.image-band-content{position:relative;z-index:2;width:100%;max-width:1440px;margin:0 auto;padding:72px 16px}
-@media(min-width:640px){.image-band-content{padding-inline:24px}}
-@media(min-width:1024px){.image-band-content{padding-inline:40px}}
-@media(min-width:1280px){.image-band-content{padding-inline:72px}}
-.image-band-content h2{color:#fff;font-size:32px;line-height:38px;max-width:640px}
-@media(min-width:768px){.image-band-content h2{font-size:40px;line-height:48px}}
-.image-band-content p{color:rgba(255,255,255,.95);max-width:560px}
+/* Newsletter: text left, form right, no card */
+.newsletter-strip{display:flex;align-items:center;justify-content:space-between;gap:32px}
+.newsletter-strip h2{margin:0 0 8px}
+.newsletter-strip .lead{margin:0}
+.newsletter-form{display:flex;gap:10px;flex:none}
+.newsletter-form .field{width:320px}
+.img-fallback{height:100%;min-height:180px;display:flex;align-items:center;justify-content:center;background:var(--teal);color:#fff;font-weight:700;padding:20px;text-align:center}
 
-/* Join band: SNDC .join-band__card, pale blue, image + content grid */
-.join-card{border-radius:12px;background:var(--primary-50);display:grid;overflow:hidden}
-@media(min-width:1024px){.join-card{grid-template-columns:minmax(0,5fr) minmax(0,6fr)}}
-.join-media{height:260px;position:relative}
-@media(min-width:640px){.join-media{height:340px}}
-@media(min-width:1024px){.join-media{height:auto;min-height:480px}}
-.join-media img{width:100%;height:100%;object-fit:cover}
-.join-body{padding:32px}
-@media(min-width:768px){.join-body{padding:48px}}
+/* Volunteer band art: teal card with colourful circles */
+.vol-art{border-radius:24px;overflow:hidden;background:var(--teal-mid);min-height:340px}
+.vol-art svg{display:block;width:100%;height:auto}
+.check-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.check-list li{display:flex;gap:10px;align-items:flex-start;font-weight:500}
+.check-list li svg{color:var(--teal-mid);flex:none;margin-top:3px}
 
-/* Partners: SNDC tiles exactly, 72px high, 220/260 wide, logo contain, grey 30% */
-.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-.marquee-track{display:flex;gap:16px;width:max-content;animation:marquee 32s linear infinite}
-.marquee:hover .marquee-track{animation-play-state:paused}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.marquee .partner-tile{flex:none;display:flex;height:72px;width:220px;align-items:center;justify-content:center;border-radius:4px;border:1px solid var(--line);background:var(--surface-2);padding:13.5px;transition:all .2s}
-@media(min-width:640px){.marquee .partner-tile{width:260px}}
-.marquee .partner-tile:hover{border-color:rgba(0,119,255,.4);background:#fff}
-.marquee .partner-logo{max-height:100%;max-width:100%;object-fit:contain;filter:grayscale(30%);transition:filter .2s}
-.marquee .partner-tile:hover .partner-logo{filter:grayscale(0)}
-/* Partners: a static centred row (SNDC-style tiles), not a scrolling
-   marquee, so no tile is ever cropped at the viewport edge. */
-.partners-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center}
-.partners-row .partner-tile{flex:none;display:flex;height:72px;width:220px;align-items:center;justify-content:center;border-radius:4px;border:1px solid var(--line);background:var(--surface-2);padding:13.5px}
-.partners-row .partner-tile:hover{border-color:rgba(0,119,255,.4);background:#fff}
-.partners-row .partner-logo{max-width:180px;max-height:44px;width:auto;height:auto;object-fit:contain;filter:grayscale(30%)}
-.partners-row .partner-tile:hover .partner-logo{filter:grayscale(0)}
+/* Partners: white tiles, community voices mint card */
+.partners-row{display:flex;flex-wrap:wrap;gap:16px}
+.partner-tile{flex:1 1 200px;display:flex;height:76px;align-items:center;justify-content:center;border-radius:12px;border:1px solid var(--line);background:#fff;padding:12px;transition:border-color .2s}
+.partner-tile:hover{border-color:rgba(224,49,49,.4)}
+.partner-logo{max-width:170px;max-height:48px;width:auto;height:auto;object-fit:contain}
+.voices-card{background:var(--teal-soft);border-radius:24px;padding:32px}
+.voices-card h3{font-size:24px;margin:0 0 8px}
+.voices-card p{color:var(--muted);margin:0 0 18px}
+.voices-quote{color:var(--teal-mid);margin-bottom:12px}
 
-/* Footer: SNDC black footer, outline-square socials, bottom bar */
-footer.site{background:#000;color:#fff;margin-top:0;padding:56px 0 0}
-.footgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 1fr;gap:24px}
-footer a{display:block;padding:4px 0;color:rgba(255,255,255,.8)}
+/* Video embed (BBDC Day 2024, on the About page) */
+.video-embed{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--radius);overflow:hidden;background:var(--teal);margin-top:24px}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+/* Footer: dark teal, five columns */
+footer.site{background:var(--teal);color:#fff;margin-top:0;padding:64px 0 0}
+.footgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr 1fr;gap:24px}
+footer a{display:block;padding:5px 0;color:rgba(255,255,255,.85);font-size:15px}
 footer a:hover{color:#fff}
-footer.site b{color:#fff}
+footer.site b{display:block;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:12px}
 footer.site .muted{color:rgba(255,255,255,.7)}
-footer.site .social-row a{border-color:rgba(255,255,255,.35);color:#fff}
-.social-row{display:flex;gap:10px;margin-top:14px}
-.social-row a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:0}
-.social-row a:hover{border-color:var(--primary);color:var(--primary)}
-.foot-bottom{border-top:1px solid rgba(255,255,255,.15);margin-top:40px;padding:20px 0;font-size:14px;color:rgba(255,255,255,.7)}
+.social-row{display:flex;gap:10px;margin-top:16px}
+.social-row a{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(255,255,255,.35);border-radius:999px;color:#fff;padding:0}
+.social-row a:hover{border-color:#fff;color:#fff}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.15);margin-top:48px;padding:20px 0;font-size:14px;color:rgba(255,255,255,.65)}
 .foot-bottom .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
 table{width:100%;border-collapse:collapse}
@@ -314,32 +366,39 @@ th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}
   .sticky-col{position:static}
   .footgrid{grid-template-columns:1fr 1fr 1fr}
   .grid3,.grid4{grid-template-columns:1fr 1fr}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .newsletter-strip{flex-direction:column;align-items:flex-start;gap:20px}
   .mobile-menu.open{display:block}
 }
 @media(max-width:760px){
   .wrap,.container-x{padding-inline:16px}
-  .section,.sndc-band{padding:56px 0}
+  .section,.band{padding:56px 0}
   .section-card,.section-dark{padding:24px 20px}
-  .hero-video{min-height:640px}
-  .hero-video-content{padding:144px 16px 40px}
-  .hero-video-content h1{font-size:44px;line-height:48px;letter-spacing:-2.5px}
-  h1{font-size:38px;line-height:42px;letter-spacing:-2px}
-  h2{font-size:30px;line-height:36px}
+  .hero-new{padding:116px 0 56px}
+  .hero-new h1{font-size:44px;line-height:1.04;letter-spacing:-.02em}
+  h1{font-size:38px;line-height:1.08;letter-spacing:-.02em}
+  h2{font-size:30px;line-height:1.15}
   .section-head{flex-direction:column;align-items:flex-start;gap:8px}
   .grid3,.grid4,.grid2{grid-template-columns:1fr}
   .card-img{height:220px}
   .card-body{padding:20px}
-  .ticker-track{gap:32px}
-  .ticker-item{font-size:15px}
-  .ticker-item b{font-size:18px}
   .footgrid{grid-template-columns:1fr}
-  footer.site{padding:40px 0 0}
-  .btn{padding-inline:20px}
+  footer.site{padding:48px 0 0}
+  .btn{padding-inline:22px}
   .hero-cta .btn{flex:1 1 100%}
   .donate-panel{padding:20px}
-  .join-body{padding:24px}
-  .image-band{min-height:380px}
-  .image-band-content{padding:56px 16px}
-  .image-band-content h2{font-size:32px;line-height:38px}
+  .wave{height:36px}
+  .prog-card{grid-template-columns:1fr}
+  .prog-icon{min-height:120px}
+  .prog-icon svg{width:48px;height:48px}
+  .blood-card{margin:-56px 12px 0}
+  .newsletter-form{flex-direction:column;width:100%}
+  .newsletter-form .field{width:100%}
+  .actions .btn-secondary{display:none}
+  .actions .langbtn{display:none}
+}
+@media(max-width:560px){
+  .actions .langbtn{display:none}
 }
 @media(min-width:1101px){.mobile-menu{display:none!important}}
