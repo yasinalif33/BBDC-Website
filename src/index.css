@@ -19,6 +19,9 @@
 html{scroll-behavior:auto;overflow-x:clip}
 body{margin:0;font-family:'Geist',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue','Noto Sans Bengali',Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:16px;overflow-x:clip}
 h1,h2,h3,h4,h5{font-family:'Geist',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:var(--ink)}
+/* Bengali mode: Hind Siliguri (Alif's choice) for body and headings */
+html[lang="bn"] body{font-family:'Hind Siliguri','Geist',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+html[lang="bn"] h1,html[lang="bn"] h2,html[lang="bn"] h3,html[lang="bn"] h4,html[lang="bn"] h5{font-family:'Hind Siliguri','Geist',ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
 a{color:inherit;text-decoration:none}
 button{font:inherit}
 img{display:block;max-width:100%}
@@ -69,7 +72,7 @@ h4{font-size:24px;line-height:32px;font-weight:600;letter-spacing:-1px;margin:0 
 .foot-logo{height:52px;max-width:260px;background:#fff;border-radius:8px;padding:4px 8px}
 /* Nav pill: SNDC .nav-pill, 48px high, #fafafa, 1px line, radius 12, gap 24 */
 nav.main{display:flex;align-items:center}
-.nav-pill{display:flex;align-items:center;gap:24px;height:48px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);padding-inline:28px}
+.nav-pill{display:flex;align-items:center;gap:32px;height:48px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);padding-inline:28px}
 nav.main a,nav.main button.navlink{font-size:16px;line-height:22px;letter-spacing:-.5px;font-weight:400;padding:0;border:0;background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 nav.main a:hover,nav.main button.navlink:hover{color:var(--primary)}
 nav.main a.active{color:var(--primary);font-weight:500}
@@ -79,7 +82,7 @@ nav.main a.active{color:var(--primary);font-weight:500}
 .dropdown.open::after{content:'';position:absolute;top:100%;left:0;right:0;height:10px}
 .nav-dd-toggle{border:0;background:none;padding:4px;margin-left:-2px;cursor:pointer;color:inherit;display:inline-flex;align-items:center}
 .nav-dd-toggle:hover{color:var(--primary)}
-.dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift);padding:8px;display:none;flex-direction:column;z-index:70}
+.dropdown-panel{position:absolute;top:calc(100% + 10px);left:0;min-width:280px;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lift);padding:8px;display:none;flex-direction:column;gap:4px;z-index:70}
 .dropdown.open .dropdown-panel{display:flex}
 nav.main .dropdown:last-child .dropdown-panel{left:auto;right:0}
 .dropdown-panel a{display:block;padding:11px 14px;border-radius:8px;font-size:14px;line-height:20px;white-space:nowrap;color:var(--ink)}
