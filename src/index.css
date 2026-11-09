@@ -355,6 +355,57 @@ footer.site .muted{color:rgba(255,255,255,.7)}
 table{width:100%;border-collapse:collapse}
 th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}
 
+/* ---------- Motion: scroll-reveal, hero entrance, ambient art ----------
+   Safety rule, learned the hard way when GSAP hid content: content is
+   NEVER hidden by default. The .reveal hidden state only exists once JS
+   has added .js to <html>, and the observer adds .in-view as elements
+   enter the viewport. If JS or the observer fails, everything stays
+   visible. The .reveal class is removed after the transition so the
+   card's own snappy hover transition takes over again. */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes dropPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pillPop{0%{transform:scale(.92)}60%{transform:scale(1.06)}100%{transform:scale(1)}}
+html.js .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
+html.js .reveal.in-view{opacity:1;transform:none}
+/* Stagger for grid children */
+.grid2>.reveal:nth-child(2){transition-delay:.08s}
+.grid3>.reveal:nth-child(2){transition-delay:.08s}
+.grid3>.reveal:nth-child(3){transition-delay:.16s}
+.grid4>.reveal:nth-child(2),.grid4>.reveal:nth-child(3),.grid4>.reveal:nth-child(4){transition-delay:.08s}
+.grid4>.reveal:nth-child(n+5){transition-delay:.16s}
+/* Hero entrance stagger */
+.hero-new .hero-pill{transition-delay:.05s}
+.hero-new h1{transition-delay:.15s}
+.hero-lead{transition-delay:.25s}
+.hero-cta{transition-delay:.35s}
+.hero-art{transition-delay:.25s}
+/* Nav links: red underline slides in on hover */
+.nav-pill>a,.nav-pill .dropdown>a{position:relative}
+.nav-pill>a::after,.nav-pill .dropdown>a::after{content:'';position:absolute;left:0;bottom:-5px;height:2px;width:0;background:var(--red);border-radius:2px;transition:width .25s ease}
+.nav-pill>a:hover::after,.nav-pill .dropdown>a:hover::after,.nav-pill>a.active::after{width:100%}
+/* Buttons lift on hover */
+.btn:hover{transform:translateY(-2px)}
+/* Programme and campaign icons grow on card hover */
+.prog-icon svg,.camp-top svg{transition:transform .3s ease}
+.prog-card:hover .prog-icon svg,.camp-card:hover .camp-top svg{transform:scale(1.12)}
+/* Blood-group pill pops when selected */
+.group-pills button.on{animation:pillPop .3s ease}
+/* Hero art: the boat bobs gently, the drop breathes */
+.boat-bob{animation:bob 4.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.drop-pulse{animation:dropPulse 3.5s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+/* Mobile menu slides down when opened */
+.mobile-menu.open{animation:menuIn .3s ease}
+/* Back-to-top floating button */
+.to-top{position:fixed;right:20px;bottom:20px;width:48px;height:48px;border-radius:50%;background:var(--teal);color:#fff;border:0;cursor:pointer;box-shadow:var(--shadow-lift);opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease,background .2s;z-index:80;display:flex;align-items:center;justify-content:center}
+.to-top:hover{background:var(--teal-2)}
+.to-top.show{opacity:1;pointer-events:auto;transform:none}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html.js .reveal{opacity:1;transform:none}
+}
+
 .mobile-menu{display:none;border-top:1px solid var(--line);padding:12px 20px 18px;background:#fff}
 .mobile-menu a,.mobile-menu button{display:block;width:100%;text-align:left;padding:11px 0;border:0;background:none;font-weight:500;color:var(--ink)}
 @media(max-width:1100px){
@@ -383,7 +434,17 @@ th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}
   .grid3,.grid4,.grid2{grid-template-columns:1fr}
   .card-img{height:220px}
   .card-body{padding:20px}
-  .footgrid{grid-template-columns:1fr}
+  /* Mobile slim-down: the page is too long and text-heavy on a phone, so
+     secondary blocks are removed here (desktop keeps them all). */
+  .ways-tiles{display:none}
+  .voices-card{display:none}
+  .plain-facts{display:none}
+  .before-card{display:none}
+  .story-card p{display:none}
+  .story-card:nth-child(3){display:none}
+  .prog-body p,.camp-body p{display:none}
+  .footgrid{grid-template-columns:1fr 1fr}
+  .footgrid>div:first-child{grid-column:1/-1}
   footer.site{padding:48px 0 0}
   .btn{padding-inline:22px}
   .hero-cta .btn{flex:1 1 100%}
