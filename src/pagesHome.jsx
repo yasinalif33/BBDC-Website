@@ -25,14 +25,16 @@ function HeroArt() {
     <circle cx="430" cy="100" r="62" fill="#f5b301" />
     <circle cx="430" cy="100" r="86" fill="none" stroke="rgba(245,179,1,.35)" strokeWidth="2" />
     <circle cx="430" cy="100" r="112" fill="none" stroke="rgba(255,255,255,.10)" strokeWidth="2" />
-    <path d="M170 60 C 152 92 110 138 110 178 A 60 60 0 0 0 230 178 C 230 138 188 92 170 60 Z" fill="#e03131" />
+    <path d="M170 60 C 152 92 110 138 110 178 A 60 60 0 0 0 230 178 C 230 138 188 92 170 60 Z" fill="#e03131" className="drop-pulse" />
     <ellipse cx="142" cy="172" rx="11" ry="20" fill="rgba(255,255,255,.35)" transform="rotate(-18 142 172)" />
     <path d="M0 300 C 90 270 180 330 280 300 C 380 270 470 330 560 300 L560 380 L0 380 Z" fill="#14524e" />
     <path d="M0 325 C 90 300 180 350 280 325 C 380 300 470 350 560 325 L560 380 L0 380 Z" fill="#14746f" />
     <path d="M0 350 C 90 330 180 368 280 350 C 380 330 470 368 560 350 L560 380 L0 380 Z" fill="#0a2e2d" />
-    <path d="M330 268 L430 268 L412 290 L348 290 Z" fill="#ffffff" />
-    <rect x="378" y="220" width="4" height="50" fill="#ffffff" />
-    <path d="M382 220 L412 230 L382 240 Z" fill="#e03131" />
+    <g className="boat-bob">
+      <path d="M330 268 L430 268 L412 290 L348 290 Z" fill="#ffffff" />
+      <rect x="378" y="220" width="4" height="50" fill="#ffffff" />
+      <path d="M382 220 L412 230 L382 240 Z" fill="#e03131" />
+    </g>
   </svg>
 }
 
@@ -72,7 +74,7 @@ export function Home() {
     </div></div></section>
 
     <div className="stat-strip"><div className="container-x"><div className="stat-grid">
-      {[{ num: '2012', label: en ? 'Founded in Barishal' : 'বরিশালে প্রতিষ্ঠিত' }, { num: '8', label: en ? 'Programme areas' : 'কর্মসূচি ক্ষেত্র' }, { num: '8', label: en ? 'Blood groups covered' : 'রক্তের গ্রুপ' }, { num: '4', label: en ? 'Campaigns open' : 'চলমান প্রচারণা' }].map(s => <div key={s.label} className="stat-item"><b>{s.num}</b><span>{s.label}</span></div>)}
+      {[{ num: '2012', label: en ? 'Founded in Barishal' : 'বরিশালে প্রতিষ্ঠিত' }, { num: '8', label: en ? 'Programme areas' : 'কর্মসূচি ক্ষেত্র' }, { num: '8', label: en ? 'Blood groups covered' : 'রক্তের গ্রুপ' }, { num: '4', label: en ? 'Campaigns open' : 'চলমান প্রচারণা' }].map(s => <div key={s.label} className="stat-item"><b data-count={s.num}>{s.num}</b><span>{s.label}</span></div>)}
     </div></div></div>
 
     <section className="band band-white"><div className="container-x"><div className="split">
@@ -100,7 +102,7 @@ export function Home() {
         <div className="ways-card ways-teal"><span className="eyebrow">{en ? 'Volunteer call-outs' : 'স্বেচ্ছাসেবক আহ্বান'}</span><h3>{en ? 'When we need hands, members hear first.' : 'যখন আমাদের হাত প্রয়োজন, সদস্যরা প্রথমে জানতে পারেন।'}</h3><p>{en ? 'Join BBDC to take part in drives, camps and distributions in your own neighbourhood in Barishal.' : 'বরিশালে আপনার নিজের মহল্লায় ড্রাইভ, ক্যাম্প ও বিতরণে অংশ নিতে বিবিডিসিতে যোগ দিন।'}</p><a className="btn btn-yellow" href={hrefFor('/volunteer')}>{en ? 'Join BBDC to take part' : 'অংশ নিতে বিবিডিসিতে যোগ দিন'}</a></div>
         <div className="ways-card ways-yellow"><span className="eyebrow">{en ? 'Celebrate With BBDC' : 'বিবিডিসির সঙ্গে উদযাপন'}</span><h3>{en ? 'Turn your special day into someone else’s good day.' : 'আপনার বিশেষ দিনটি অন্য কারো ভালো দিনে পরিণত করুন।'}</h3><p>{en ? 'Birthdays, anniversaries, weddings, graduations or a day in memory of someone you love. Celebrate with a gift to a family in Barishal.' : 'জন্মদিন, বিবাহবার্ষিকী, বিয়ে, গ্র্যাজুয়েশন, নতুন শিশু, অথবা প্রিয় কারো স্মরণে একটি দিন। বরিশালের একটি পরিবারকে উপহার দিয়ে উদযাপন করুন।'}</p><div className="way-chips">{(en ? ['Birthday', 'Anniversary', 'Wedding', 'Graduation', 'New baby', 'In memory'] : ['জন্মদিন', 'বিবাহবার্ষিকী', 'বিয়ে', 'গ্র্যাজুয়েশন', 'নতুন শিশু', 'স্মরণে']).map(x => <span key={x} className="way-chip">{x}</span>)}</div><a className="btn btn-dark" href={hrefFor('/celebrate')}>{en ? 'Plan my celebration' : 'আমার উদযাপনের পরিকল্পনা করুন'}</a></div>
       </div>
-      <div className="grid4" style={{ marginTop: 20 }}>{WAYS.slice(0, 8).map(w => <a key={w.en} href={hrefFor(w.to)} className="way-tile"><span className="way-icon"><Icon name={w.icon} /></span>{pick(lang, w.en, w.bn)}</a>)}</div>
+      <div className="grid4 ways-tiles" style={{ marginTop: 20 }}>{WAYS.slice(0, 8).map(w => <a key={w.en} href={hrefFor(w.to)} className="way-tile"><span className="way-icon"><Icon name={w.icon} /></span>{pick(lang, w.en, w.bn)}</a>)}</div>
     </div></section>
 
     <section className="band band-mint"><div className="container-x"><div className="section-head"><div><span className="eyebrow">{u.stories}</span><h2>{u.latest}</h2></div><a className="view-all" href={hrefFor('/stories')}>{en ? 'Read more stories' : 'আরও গল্প পড়ুন'} →</a></div><div className="grid3">{STORIES.slice(0, 3).map(s => <a key={s.slug} className="story-card" href={hrefFor(`/stories/${s.slug}`)}><div className="story-pills"><span className={`pill ${s.pillClass}`}>{pick(lang, s.pill, s.pill_bn)}</span><span className="pill-note">{pick(lang, s.pillNote, s.pillNote_bn)}</span></div><h3>{pick(lang, s.en, s.bn)}</h3><p>{pick(lang, s.ex_en, s.ex_bn)}</p><span className="view-all">{en ? 'Read more' : 'আরও পড়ুন'} →</span></a>)}</div></div></section>
