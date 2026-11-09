@@ -29,6 +29,7 @@ export function Icon({ name, size = 20 }) {
     instagram: <><rect x="2" y="2" width="20" height="20" rx="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></>,
     youtube: <><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" /><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" /></>,
     x: <><path d="M4 4l16 16M20 4L4 20" /></>,
+    up: <><path d="M12 19V5M5 12l7-7 7 7" /></>,
     quote: <><path d="M10 7.5C7.5 8.5 5.5 11 5.5 14v4.5h5V13H8c.3-2 1.2-3.5 2.5-4.5V7.5zm9 0c-2.5 1-4.5 3.5-4.5 6.5v4.5h5V13h-2.5c.3-2 1.2-3.5 2.5-4.5V7.5z" /></>,
   }
   return <svg {...p}>{paths[name] || paths.heart}</svg>
@@ -204,4 +205,14 @@ export function PartnersMarquee() {
 export function Newsletter() {
   const { lang } = useSite(); const u = t(null, lang); const [ok, setOk] = useState(false)
   return <div className="newsletter-strip"><div><h2>{u.newsletter}</h2><p className="lead">{lang === 'bn' ? 'আপনার সহায়তা যাদের কাছে পৌঁছায়, তাদের নিয়ে একটি ছোট ইমেইল। স্প্যাম নয়, যেকোনো সময় বাতিল করা যাবে।' : 'One short email about the people your support reaches. No spam, unsubscribe anytime.'}</p></div>{ok ? <p className="ok">{u.subscribed}</p> : <form className="newsletter-form" onSubmit={e => { e.preventDefault(); setOk(true) }}><input required type="email" className="field" placeholder="Email" /><button className="btn btn-primary">{u.subscribe}</button></form>}</div>
+}
+export function BackToTop() {
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 600)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+  return <button type="button" className={`to-top ${show ? 'show' : ''}`} aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><Icon name="up" size={20} /></button>
 }
