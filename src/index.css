@@ -496,6 +496,7 @@ html.js .reveal.in-view{opacity:1;transform:none}
   h2{font-size:30px;line-height:1.15}
   .section-head{flex-direction:column;align-items:flex-start;gap:8px}
   .grid3,.grid4,.grid2{grid-template-columns:1fr}
+  .testi-grid,.news-grid,.fund-grid{grid-template-columns:1fr}
   .card-img{height:220px}
   .card-body{padding:20px}
   /* Mobile slim-down: the page is long and text-heavy on a phone, so
