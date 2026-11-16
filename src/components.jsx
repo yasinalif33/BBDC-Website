@@ -67,7 +67,7 @@ export function Header({ topBarH = 40 }) {
   const link = (to, label) => <a key={to} href={hrefFor(to)} className={path === to ? 'active' : ''}>{label}</a>
   const en = lang !== 'bn'
   return (
-    <div className={`site-header-bar ${stuck ? 'stuck' : ''}`} style={{ top: stuck ? 0 : topBarH }}>
+    <div className={`site-header-bar ${stuck ? 'stuck' : ''}`} style={{ top: stuck ? 12 : topBarH + 12 }}>
       <div className="container-x"><header className="nav-card">
         <a href={hrefFor('/')} className="logo" aria-label="BBDC home"><img src={LOGO_URL} alt="BBDC - Beyond Boundaries for Development and Change" className="logo-img" onError={e => { e.currentTarget.style.display = 'none'; const t = e.currentTarget.nextSibling; if (t) t.style.display = 'inline' }} /><span className="logo-text">BBDC</span></a>
         <nav className="main" aria-label="Main">
