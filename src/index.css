@@ -128,7 +128,7 @@ header.site{z-index:60}
 .band-lav{background:var(--lav)}
 .band-mint{background:#fff}
 .band-white{background:#fff}
-.band-navy{background:var(--navy);color:#fff}
+.band-navy{background:linear-gradient(160deg,#1e3a5f 0%,var(--navy-2) 38%,var(--navy) 72%,#081426 100%);color:#fff}
 .band-navy h2{color:#fff}
 .band-navy .lead{color:rgba(255,255,255,.85)}
 .section{padding:56px 0}
