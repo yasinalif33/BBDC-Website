@@ -23,13 +23,9 @@ export function currentFund() {
   return new URLSearchParams(window.location.search).get('fund')
 }
 
-export function currentGroup() {
-  return new URLSearchParams(window.location.search).get('group')
-}
-
 const STATIC_PAGES = new Set([
   '/', '/about', '/programmes', '/campaigns', '/donate', '/celebrate',
-  '/stories', '/blood', '/volunteer', '/transparency', '/contact',
+  '/blog', '/media', '/volunteer', '/transparency', '/contact',
 ])
 
 export function matchRoute(path) {
@@ -37,6 +33,6 @@ export function matchRoute(path) {
   const parts = path.split('/').filter(Boolean)
   if (parts.length === 2 && parts[0] === 'programmes') return { page: 'programme', slug: parts[1] }
   if (parts.length === 2 && parts[0] === 'campaigns') return { page: 'campaign', slug: parts[1] }
-  if (parts.length === 2 && parts[0] === 'stories') return { page: 'story', slug: parts[1] }
+  if (parts.length === 2 && parts[0] === 'blog') return { page: 'post', slug: parts[1] }
   return { page: 'home' }
 }
