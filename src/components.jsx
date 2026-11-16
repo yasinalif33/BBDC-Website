@@ -82,7 +82,7 @@ export function Header({ topBarH = 40 }) {
           </div>
         </nav>
         <div className="actions">
-          <a href={hrefFor('/volunteer')} className="btn btn-secondary btn-sm" style={{ display: 'inline-flex' }}>{lang === 'bn' ? 'যোগ দিন' : 'Join us'}</a>
+          <a href={hrefFor('/volunteer')} className="btn btn-secondary btn-sm">{lang === 'bn' ? 'যোগ দিন' : 'Join us'}</a>
           <a href={hrefFor('/donate')} className="btn btn-primary btn-sm">{u.donate}</a>
           <button className="iconbtn burger" aria-label="Menu" onClick={() => setMobile(!mobile)}><Icon name={mobile ? 'close' : 'menu'} /></button>
         </div>
