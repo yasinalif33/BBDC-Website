@@ -51,7 +51,7 @@ function Shell() {
           setTimeout(() => el.classList.remove('reveal'), 850)
         })
       }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' })
-      document.querySelectorAll('.band, .card, .prog-card, .camp-card, .story-card, .film-card, .side-card, .mini-card, .info-box, .fund-card, .take-option, .donate-panel, .zakat-card, .gift-card, .testi-card, .news-card, .partner-tile, .tl-item, .section, .hero-pill, .hero-new h1, .hero-lead, .hero-cta, .newsletter-strip, .video-embed, .video-section, .video-player, .video-thumbs, .faq').forEach(el => { el.classList.add('reveal'); io.observe(el) })
+      document.querySelectorAll('.band, .card, .prog-card, .camp-card, .story-card, .film-card, .side-card, .mini-card, .info-box, .fund-card, .take-option, .donate-panel, .zakat-card, .gift-card, .testi-card, .news-card, .partner-tile, .tl-item, .hero-pill, .hero-new h1, .hero-lead, .hero-cta, .newsletter-strip, .video-embed, .video-section, .video-player, .video-thumbs, .faq').forEach(el => { el.classList.add('reveal'); io.observe(el) })
       return () => { io.disconnect() }
     } catch { revealAll() }
   }, [])
